@@ -41,7 +41,7 @@ func SetAttrOnSVStringParam(attrs param.Attributes) error {
 func AddSVStringParam(ps *param.ParamSet) error {
 	semverParam = ps.Add("semver", &SVSetter{Value: &SemVer},
 		"specify the semantic version number to be used",
-		param.AltName("vsn"))
+		param.AltName("svn"))
 
 	return nil
 }
