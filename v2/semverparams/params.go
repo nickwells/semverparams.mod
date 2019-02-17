@@ -37,8 +37,8 @@ func SetAttrOnSVStringParam(attrs param.Attributes) error {
 }
 
 // AddSVStringParam will add parameters for setting the semantic version
-// number to the passed ParamSet
-func AddSVStringParam(ps *param.ParamSet) error {
+// number to the passed PSet
+func AddSVStringParam(ps *param.PSet) error {
 	semverParam = ps.Add("semver", &SVSetter{Value: &SemVer},
 		"specify the semantic version number to be used",
 		param.AltName("svn"))
@@ -47,8 +47,8 @@ func AddSVStringParam(ps *param.ParamSet) error {
 }
 
 // AddIDParams will add parameters for setting the pre-release and build IDs
-// of a semantic version number to the passed ParamSet
-func AddIDParams(ps *param.ParamSet) error {
+// of a semantic version number to the passed PSet
+func AddIDParams(ps *param.PSet) error {
 	ps.Add("pre-rel-IDs",
 		psetter.StrListSetter{
 			Value:            &PreRelIDs,
