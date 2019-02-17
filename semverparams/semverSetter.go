@@ -3,12 +3,10 @@ package semverparams
 import (
 	"errors"
 
-	"github.com/nickwells/param.mod/v2/param"
+	"github.com/nickwells/param.mod/param"
 	"github.com/nickwells/semver.mod/semver"
 )
 
-// SVSetter is a parameter setter that will set the value of a semantic
-// version number.
 type SVSetter struct {
 	Value **semver.SV
 }
@@ -37,7 +35,7 @@ func (svs SVSetter) AllowedValues() string {
 	return "a semantic version number such as v1.2.3" +
 		" optionally followed by non-empty lists of dot-separated" +
 		" pre-release and build IDs." +
-		" For instance, 'v1.2.3-a.b.c+x.y.z'." +
+		" For instance, 'v1.2.3-a.b+x.y'." +
 		" See the Semantic Versioning spec for full details."
 }
 
