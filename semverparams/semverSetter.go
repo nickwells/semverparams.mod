@@ -7,6 +7,9 @@ import (
 	"github.com/nickwells/semver.mod/semver"
 )
 
+// SVSetter is a type which will satisfy the param.Setter interface and so
+// can be used when specifying a command line argument using the param
+// package.
 type SVSetter struct {
 	Value **semver.SV
 }

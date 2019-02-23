@@ -7,7 +7,12 @@ import (
 	"github.com/nickwells/semver.mod/semver"
 )
 
-// SVSetter is a parameter setter which will set a semantic version number
+// SVSetter is a parameter setter which will set a semantic version
+// number. It satisfies the param.Setter interface and so can be used when
+// specifying a command line argument using the param package.
+//
+// Note that you need to initialise the Value field with the address of a
+// pointer to a semver.SV.
 type SVSetter struct {
 	Value **semver.SV
 }
