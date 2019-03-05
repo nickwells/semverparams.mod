@@ -50,7 +50,7 @@ func AddSVStringParam(ps *param.PSet) error {
 // of a semantic version number to the passed PSet
 func AddIDParams(ps *param.PSet) error {
 	ps.Add("pre-rel-IDs",
-		psetter.StrListSetter{
+		psetter.StrList{
 			Value:            &PreRelIDs,
 			StrListSeparator: psetter.StrListSeparator{Sep: "."},
 			Checks: []check.StringSlice{
@@ -64,7 +64,7 @@ func AddIDParams(ps *param.PSet) error {
 	)
 
 	ps.Add("build-IDs",
-		psetter.StrListSetter{
+		psetter.StrList{
 			Value:            &BuildIDs,
 			StrListSeparator: psetter.StrListSeparator{Sep: "."},
 			Checks: []check.StringSlice{

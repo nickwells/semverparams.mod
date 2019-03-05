@@ -1,8 +1,6 @@
 package semverparams
 
 import (
-	"errors"
-
 	"github.com/nickwells/param.mod/v2/param"
 	"github.com/nickwells/semver.mod/semver"
 )
@@ -14,25 +12,21 @@ import (
 // Note that you need to initialise the Value field with the address of a
 // pointer to a semver.SV.
 type SVSetter struct {
+	param.ValueReqMandatory
+
 	Value **semver.SV
-}
-
-// ValueReq returns param.Mandatory indicating that some value must follow
-// the parameter
-func (svs SVSetter) ValueReq() param.ValueReq { return param.Mandatory }
-
-// Set (called when there is no following value) returns an error
-func (svs SVSetter) Set(_ string) error {
-	return errors.New("no value given (it should be followed by '=...')")
 }
 
 // SetWithVal checks that the parameter value meets the checks if any. It
 // returns an error if the check is not satisfied. Only if the check
 // is not violated is the Value set.
 func (svs *SVSetter) SetWithVal(_ string, paramVal string) error {
-	var err error
-	*svs.Value, err = semver.ParseSV(paramVal)
-	return err
+	v, err := semver.ParseSV(paramVal)
+	if err != nil {
+		return err
+	}
+	*svs.Value = v
+	return nil
 }
 
 // AllowedValues simply returns "any string" since StringSetter
