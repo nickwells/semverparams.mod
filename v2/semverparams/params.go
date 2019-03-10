@@ -6,6 +6,7 @@ import (
 	"sync"
 
 	"github.com/nickwells/check.mod/check"
+	"github.com/nickwells/checksetter.mod/checksetter"
 	"github.com/nickwells/filecheck.mod/filecheck"
 	"github.com/nickwells/param.mod/v2/param"
 	"github.com/nickwells/param.mod/v2/param/psetter"
@@ -21,9 +22,15 @@ var SemVer *semver.SV
 // parsing if the list is passed to the program
 var PreRelIDs []string
 
+// PreRelIDChecks is a list of checks to be applied to the pre-release IDs
+var PreRelIDChecks []check.StringSlice
+
 // BuildIDs is a list of Build IDs that will be set by the parameter parsing
 // if the list is passed to the program
 var BuildIDs []string
+
+// BuildIDChecks is a list of checks to be applied to the build IDs
+var BuildIDChecks []check.StringSlice
 
 var semverParam *param.ByName
 
@@ -99,6 +106,34 @@ func AddIDParams(ps *param.PSet) error {
 		"specify a non-empty list of build IDs"+
 			" suitable for setting on a semantic version number",
 		param.AltName("bldIDs"),
+		param.GroupName(semverGroupName),
+	)
+
+	return nil
+}
+
+// AddIDCheckerParams will add parameters for setting the checks to be
+// applied to any pre-release and build IDs of a semantic version number.
+func AddIDCheckerParams(ps *param.PSet) error {
+	addSVGroup(ps)
+
+	ps.Add("pre-rel-ID-checks",
+		checksetter.StringSlice{
+			Value: &PreRelIDChecks,
+		},
+		"specify a non-empty list of check functions"+
+			" to apply to the pre-release IDs for the semantic version number",
+		param.AltName("prID-checks"),
+		param.GroupName(semverGroupName),
+	)
+
+	ps.Add("build-ID-checks",
+		checksetter.StringSlice{
+			Value: &BuildIDChecks,
+		},
+		"specify a non-empty list of check functions"+
+			" to apply to the build IDs for the semantic version number",
+		param.AltName("bldID-checks"),
 		param.GroupName(semverGroupName),
 	)
 

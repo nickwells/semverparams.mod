@@ -1,5 +1,9 @@
 github.com/nickwells/check.mod v1.1.4 h1:gtAaZXI/rR68Z0R/TVpoj2BLmipc98OVA+xrQmmtuY0=
 github.com/nickwells/check.mod v1.1.4/go.mod h1:7MUyCBvcaYtHcZUDb2n2iCU2RmRZk9uyA3vxSJQ7PFw=
+github.com/nickwells/check.mod v1.2.0 h1:3eI9CTTcgvS3R23d1lhV+wRmxAW2rImeK8rOpwTu9n0=
+github.com/nickwells/check.mod v1.2.0/go.mod h1:HdkkRGe7EwsfNugUexrwsS37D0JpaWupik6Hdvoptz4=
+github.com/nickwells/checksetter.mod v1.1.0 h1:b1DrD02b4ivek8akZzmQZlCnl1Mx4jP8OIffSv1BsHg=
+github.com/nickwells/checksetter.mod v1.1.0/go.mod h1:6UUByj/pwW39l0svnXuszNIZrKx+VQe84RcGNaqx48k=
 github.com/nickwells/filecheck.mod v1.0.4 h1:OiS7lFNbX/3/35Qn9YkuYISIQ5AF6Jqg4VEfQCYFiIY=
 github.com/nickwells/filecheck.mod v1.0.4/go.mod h1:M5XDC+3zpTWp77cU/5Cr8BlCzZ5YlEGVcFN/gDkicPI=
 github.com/nickwells/fileparse.mod v1.1.3 h1:QxJlqEn1llQhsHASqgGc+LcnrRa+MsK/q3nFAoACJ7g=
