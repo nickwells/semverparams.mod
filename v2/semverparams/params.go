@@ -42,7 +42,7 @@ var setGroupOnce sync.Once
 func addSVGroup(ps *param.PSet) {
 	setGroupOnce.Do(func() {
 		ps.AddGroup(semverGroupName,
-			"common parameters concerned with semantic version numbers")
+			"common parameters concerned with "+semver.Names)
 		ps.AddGroupConfigFile(semverGroupName,
 			filepath.Join(xdg.ConfigHome(), "semver.config"),
 			filecheck.Optional)
@@ -67,7 +67,7 @@ func SetAttrOnSVStringParam(attrs param.Attributes) error {
 func AddSVStringParam(ps *param.PSet) error {
 	addSVGroup(ps)
 	semverParam = ps.Add("semver", &SVSetter{Value: &SemVer},
-		"specify the semantic version number to be used",
+		"specify the "+semver.Name+" to be used",
 		param.AltName("svn"),
 		param.GroupName(semverGroupName),
 	)
@@ -89,7 +89,7 @@ func AddIDParams(ps *param.PSet) error {
 			},
 		},
 		"specify a non-empty list of pre-release IDs"+
-			" suitable for setting on a semantic version number",
+			" suitable for setting on a "+semver.Name,
 		param.AltName("prIDs"),
 		param.GroupName(semverGroupName),
 	)
@@ -104,7 +104,7 @@ func AddIDParams(ps *param.PSet) error {
 			},
 		},
 		"specify a non-empty list of build IDs"+
-			" suitable for setting on a semantic version number",
+			" suitable for setting on a "+semver.Name,
 		param.AltName("bldIDs"),
 		param.GroupName(semverGroupName),
 	)
@@ -116,13 +116,13 @@ func AddIDParams(ps *param.PSet) error {
 // applied to any pre-release and build IDs of a semantic version number.
 func AddIDCheckerParams(ps *param.PSet) error {
 	addSVGroup(ps)
+	const paramDescIntro = "specify a non-empty list of check functions to apply"
 
 	ps.Add("pre-rel-ID-checks",
 		checksetter.StringSlice{
 			Value: &PreRelIDChecks,
 		},
-		"specify a non-empty list of check functions"+
-			" to apply to the pre-release IDs for the semantic version number",
+		paramDescIntro+" to the pre-release IDs for the "+semver.Name,
 		param.AltName("prID-checks"),
 		param.GroupName(semverGroupName),
 	)
@@ -131,8 +131,7 @@ func AddIDCheckerParams(ps *param.PSet) error {
 		checksetter.StringSlice{
 			Value: &BuildIDChecks,
 		},
-		"specify a non-empty list of check functions"+
-			" to apply to the build IDs for the semantic version number",
+		paramDescIntro+" to the build IDs for the "+semver.Name,
 		param.AltName("bldID-checks"),
 		param.GroupName(semverGroupName),
 	)

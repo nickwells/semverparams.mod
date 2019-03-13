@@ -1,9 +1,9 @@
 github.com/nickwells/check.mod v1.1.4 h1:gtAaZXI/rR68Z0R/TVpoj2BLmipc98OVA+xrQmmtuY0=
 github.com/nickwells/check.mod v1.1.4/go.mod h1:7MUyCBvcaYtHcZUDb2n2iCU2RmRZk9uyA3vxSJQ7PFw=
-github.com/nickwells/check.mod v1.2.0 h1:3eI9CTTcgvS3R23d1lhV+wRmxAW2rImeK8rOpwTu9n0=
-github.com/nickwells/check.mod v1.2.0/go.mod h1:HdkkRGe7EwsfNugUexrwsS37D0JpaWupik6Hdvoptz4=
-github.com/nickwells/checksetter.mod v1.1.0 h1:b1DrD02b4ivek8akZzmQZlCnl1Mx4jP8OIffSv1BsHg=
-github.com/nickwells/checksetter.mod v1.1.0/go.mod h1:6UUByj/pwW39l0svnXuszNIZrKx+VQe84RcGNaqx48k=
+github.com/nickwells/check.mod v1.3.0 h1:4BRhZyi5/D38TSv6w/VobrV8ijU9wU+kdliXZcntMA8=
+github.com/nickwells/check.mod v1.3.0/go.mod h1:HdkkRGe7EwsfNugUexrwsS37D0JpaWupik6Hdvoptz4=
+github.com/nickwells/checksetter.mod v1.2.0 h1:68w/ss6FXg3JXG6CRgMiQ/jGV9ActTHjywMxMhmxyws=
+github.com/nickwells/checksetter.mod v1.2.0/go.mod h1:W3GaIX352cf21xSoBb/QgQCVde7j06tThxaZL8VMN3w=
 github.com/nickwells/filecheck.mod v1.0.4 h1:OiS7lFNbX/3/35Qn9YkuYISIQ5AF6Jqg4VEfQCYFiIY=
 github.com/nickwells/filecheck.mod v1.0.4/go.mod h1:M5XDC+3zpTWp77cU/5Cr8BlCzZ5YlEGVcFN/gDkicPI=
 github.com/nickwells/fileparse.mod v1.1.3 h1:QxJlqEn1llQhsHASqgGc+LcnrRa+MsK/q3nFAoACJ7g=
@@ -14,8 +14,8 @@ github.com/nickwells/mathutil.mod v1.0.2 h1:VyD9ZVqzx3Z7Dd4q8yB/ov+EPJuT6EhuQOJY
 github.com/nickwells/mathutil.mod v1.0.2/go.mod h1:8f0HTkTxNjWEdeuSHUN+cOUvSbzc3SQqI/EbtdY1+MU=
 github.com/nickwells/param.mod/v2 v2.0.2 h1:ap1FlFfXRKPKZvZ0rhgznV2/xMniznxLZABQqPtJE3o=
 github.com/nickwells/param.mod/v2 v2.0.2/go.mod h1:lm30R3fBXGe/3atxcxC5Jnya9tmFOAoFyQeipwCKsNI=
-github.com/nickwells/semver.mod v1.1.2 h1:zM+ZoxRwi/G8WoO5PwEJE2/WujNKb7mSf4Qvauc2sOA=
-github.com/nickwells/semver.mod v1.1.2/go.mod h1:TaQkGWYavQgJsrudEGRCzsk3uo6mYWyLJ8e4fJJP99g=
+github.com/nickwells/semver.mod v1.2.0 h1:KJ1keFKbYy/5QWjIN9khSpCwYEtZ0+rYzI9lBRuIKQc=
+github.com/nickwells/semver.mod v1.2.0/go.mod h1:Sx2zpE2qusFKCxbx/MYsIaFWiuvuDxNRzTuj2yNfEUE=
 github.com/nickwells/strdist.mod v1.0.4 h1:niFItxs5tCqKhAMYbpwVocojzBah1XKHlYc44bUyNhc=
 github.com/nickwells/strdist.mod v1.0.4/go.mod h1:LptWSU7x3FcfI1CmWsHfak7Nrnmq+eykvgpbPh0AGac=
 github.com/nickwells/testhelper.mod v1.1.0 h1:TQZS3zp7oT5RzuiC/W6nmhpwk/omrJvyC04AeytEgQI=
