@@ -5,6 +5,6 @@ require (
 	github.com/nickwells/checksetter.mod v1.2.2
 	github.com/nickwells/filecheck.mod v1.0.5
 	github.com/nickwells/param.mod/v2 v2.1.0
-	github.com/nickwells/semver.mod v1.2.2
+	github.com/nickwells/semver.mod v1.2.3
 	github.com/nickwells/xdg.mod v1.0.2
 )

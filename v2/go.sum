@@ -12,8 +12,8 @@ github.com/nickwells/mathutil.mod v1.0.3 h1:Mo3CCOKMiAS0mmozzrrkfTW7UQeD46k4S3kM
 github.com/nickwells/mathutil.mod v1.0.3/go.mod h1:NzfRwNXADr7V3SJ4tYwkJKoe8tWAH8LkxUx3pHFQK50=
 github.com/nickwells/param.mod/v2 v2.1.0 h1:rRW83Dl8i8WLA3Y+yS0QAerdvg4I9Osey8p4QGgt7cs=
 github.com/nickwells/param.mod/v2 v2.1.0/go.mod h1:f3npT0GzDrNizUvoVw8LM8iwW3OTpr9IknXg/YifVL8=
-github.com/nickwells/semver.mod v1.2.2 h1:T4BJ/JIGtJPp8meK+ZO7T6JjTt/tI2B8TNAa6i2Aqzw=
-github.com/nickwells/semver.mod v1.2.2/go.mod h1:UOebne7EiFss/2aWgQNox4XgsQxNRoz5IdoTevf8xPo=
+github.com/nickwells/semver.mod v1.2.3 h1:o/2irD1Z3Q9Nmjht5U8obUDwSOMXOp1YkWN18Spq7S0=
+github.com/nickwells/semver.mod v1.2.3/go.mod h1:UOebne7EiFss/2aWgQNox4XgsQxNRoz5IdoTevf8xPo=
 github.com/nickwells/strdist.mod v1.0.6 h1:B5UYCRIVU4KAnWZ2x34JckpyJMt/Lxl+fX4WVC483W0=
 github.com/nickwells/strdist.mod v1.0.6/go.mod h1:zI0gCgXT3oW3JNrn0f8TbXE9r5wurZAeW4BWhWbfTjY=
 github.com/nickwells/testhelper.mod v1.3.0 h1:OLo5AiCDJGB8G3P5T0YXbq9UwNdVIAROEifV41zLdww=
