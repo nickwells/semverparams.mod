@@ -2,16 +2,14 @@ package semverparams
 
 import (
 	"errors"
-	"path/filepath"
+	"fmt"
 	"sync"
 
 	"github.com/nickwells/check.mod/check"
 	"github.com/nickwells/checksetter.mod/v2/checksetter"
-	"github.com/nickwells/filecheck.mod/filecheck"
 	"github.com/nickwells/param.mod/v3/param"
 	"github.com/nickwells/param.mod/v3/param/psetter"
 	"github.com/nickwells/semver.mod/semver"
-	"github.com/nickwells/xdg.mod/xdg"
 )
 
 // SemVer is a semantic version number that will be set by the parameter
@@ -34,7 +32,10 @@ var BuildIDChecks []check.StringSlice
 
 var semverParam *param.ByName
 
-const semverGroupName = "semver"
+const (
+	semverGroupName       = "semver"
+	semverChecksGroupName = "semver-checks"
+)
 
 var setGroupOnce sync.Once
 
@@ -43,9 +44,8 @@ func addSVGroup(ps *param.PSet) {
 	setGroupOnce.Do(func() {
 		ps.AddGroup(semverGroupName,
 			"common parameters concerned with "+semver.Names)
-		ps.AddGroupConfigFile(semverGroupName,
-			filepath.Join(xdg.ConfigHome(), "semver.config"),
-			filecheck.Optional)
+		_ = SetGroupGlobalConfigFile_semver(ps)
+		_ = SetGroupConfigFile_semver(ps)
 	})
 }
 
@@ -115,7 +115,11 @@ func AddIDParams(ps *param.PSet) error {
 // AddIDCheckerParams will add parameters for setting the checks to be
 // applied to any pre-release and build IDs of a semantic version number.
 func AddIDCheckerParams(ps *param.PSet) error {
-	addSVGroup(ps)
+	ps.AddGroup(semverChecksGroupName,
+		"common parameters concerned with checks on "+semver.Names)
+	_ = SetGroupGlobalConfigFile_semver_checks(ps)
+	_ = SetGroupConfigFile_semver_checks(ps)
+
 	const paramDescIntro = "specify a non-empty list of check functions to apply"
 
 	ps.Add("pre-rel-ID-checks",
@@ -124,7 +128,7 @@ func AddIDCheckerParams(ps *param.PSet) error {
 		},
 		paramDescIntro+" to the pre-release IDs for the "+semver.Name,
 		param.AltName("prID-checks"),
-		param.GroupName(semverGroupName),
+		param.GroupName(semverChecksGroupName),
 	)
 
 	ps.Add("build-ID-checks",
@@ -133,8 +137,29 @@ func AddIDCheckerParams(ps *param.PSet) error {
 		},
 		paramDescIntro+" to the build IDs for the "+semver.Name,
 		param.AltName("bldID-checks"),
-		param.GroupName(semverGroupName),
+		param.GroupName(semverChecksGroupName),
 	)
+
+	ps.AddFinalCheck(checkIDs)
+
+	return nil
+}
+
+// checkIDs checks that any supplied IDs conform to the specified checks
+func checkIDs() error {
+	for _, chk := range PreRelIDChecks {
+		err := chk(PreRelIDs)
+		if err != nil {
+			return fmt.Errorf("Bad PreRelIDs: %s", err)
+		}
+	}
+
+	for _, chk := range BuildIDChecks {
+		err := chk(BuildIDs)
+		if err != nil {
+			return fmt.Errorf("Bad BuildIDs: %s", err)
+		}
+	}
 
 	return nil
 }
