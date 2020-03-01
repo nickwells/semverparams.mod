@@ -1,7 +1,7 @@
 package semverparams
 
 import (
-	"github.com/nickwells/param.mod/v3/param"
+	"github.com/nickwells/param.mod/v4/param"
 	"github.com/nickwells/semver.mod/semver"
 )
 
@@ -13,7 +13,6 @@ import (
 // pointer to a semver.SV.
 type SVSetter struct {
 	param.ValueReqMandatory
-	param.NilAVM
 
 	Value **semver.SV
 }

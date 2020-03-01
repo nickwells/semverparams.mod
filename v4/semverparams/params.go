@@ -6,9 +6,9 @@ import (
 	"sync"
 
 	"github.com/nickwells/check.mod/check"
-	"github.com/nickwells/checksetter.mod/v2/checksetter"
-	"github.com/nickwells/param.mod/v3/param"
-	"github.com/nickwells/param.mod/v3/param/psetter"
+	"github.com/nickwells/checksetter.mod/v3/checksetter"
+	"github.com/nickwells/param.mod/v4/param"
+	"github.com/nickwells/param.mod/v4/param/psetter"
 	"github.com/nickwells/semver.mod/semver"
 )
 
