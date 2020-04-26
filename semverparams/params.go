@@ -44,8 +44,8 @@ func addSVGroup(ps *param.PSet) {
 	setGroupOnce.Do(func() {
 		ps.AddGroup(semverGroupName,
 			"common parameters concerned with "+semver.Names)
-		_ = SetGroupGlobalConfigFile_semver(ps)
-		_ = SetGroupConfigFile_semver(ps)
+		_ = setGlobalConfigFileForGroupSemver(ps)
+		_ = setConfigFileForGroupSemver(ps)
 	})
 }
 
@@ -117,8 +117,8 @@ func AddIDParams(ps *param.PSet) error {
 func AddIDCheckerParams(ps *param.PSet) error {
 	ps.AddGroup(semverChecksGroupName,
 		"common parameters concerned with checks on "+semver.Names)
-	_ = SetGroupGlobalConfigFile_semver_checks(ps)
-	_ = SetGroupConfigFile_semver_checks(ps)
+	_ = setGlobalConfigFileForGroupSemverChecks(ps)
+	_ = setConfigFileForGroupSemverChecks(ps)
 
 	const paramDescIntro = "specify a non-empty list of check functions to apply"
 
