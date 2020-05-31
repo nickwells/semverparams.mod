@@ -1,7 +1,7 @@
 package semverparams
 
 import (
-	"github.com/nickwells/param.mod/v4/param"
+	"github.com/nickwells/param.mod/v5/param/psetter"
 	"github.com/nickwells/semver.mod/semver"
 )
 
@@ -12,7 +12,7 @@ import (
 // Note that you need to initialise the Value field with the address of a
 // pointer to a semver.SV.
 type SVSetter struct {
-	param.ValueReqMandatory
+	psetter.ValueReqMandatory
 
 	Value **semver.SV
 }

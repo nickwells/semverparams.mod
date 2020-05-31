@@ -1,4 +1,4 @@
 package semverparams
 
-//go:generate mkparamfilefunc -group semver
-//go:generate mkparamfilefunc -group semver-checks
+//go:generate mkparamfilefunc -private -group semver
+//go:generate mkparamfilefunc -private -group semver-checks

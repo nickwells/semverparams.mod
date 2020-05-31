@@ -10,7 +10,7 @@ import (
 	"path/filepath"
 
 	"github.com/nickwells/filecheck.mod/filecheck"
-	"github.com/nickwells/param.mod/v4/param"
+	"github.com/nickwells/param.mod/v5/param"
 	"github.com/nickwells/xdg.mod/xdg"
 )
 
@@ -32,7 +32,7 @@ func setConfigFileForGroupSemver(ps *param.PSet) error {
 			"github.com",
 			"nickwells",
 			"semverparams.mod",
-			"v4",
+			"v5",
 			"semverparams",
 			"group-semver.cfg"),
 		filecheck.Optional)
