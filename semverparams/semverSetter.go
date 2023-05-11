@@ -2,7 +2,7 @@ package semverparams
 
 import (
 	"github.com/nickwells/param.mod/v5/param/psetter"
-	"github.com/nickwells/semver.mod/semver"
+	"github.com/nickwells/semver.mod/v2/semver"
 )
 
 // SVSetter is a parameter setter which will set a semantic version
