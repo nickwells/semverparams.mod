@@ -2,7 +2,6 @@ package semverparams
 
 import (
 	"fmt"
-	"sync"
 
 	"github.com/nickwells/check.mod/v2/check"
 	"github.com/nickwells/checksetter.mod/v4/checksetter"
@@ -57,18 +56,6 @@ const (
 	semverChecksGroupName = "semver-checks"
 )
 
-var setGroupOnce sync.Once
-
-// addSVGroup will add the semver group to the set of parameter groups
-func addSVGroup(ps *param.PSet) {
-	setGroupOnce.Do(func() {
-		ps.AddGroup(semverGroupName,
-			"common parameters concerned with "+semver.Names)
-		_ = setGlobalConfigFileForGroupSemver(ps)
-		_ = setConfigFileForGroupSemver(ps)
-	})
-}
-
 // AddSVStringParam will add a parameter for setting the semantic version
 // number to the passed PSet
 func (svv *SemverVals) AddSVStringParam(
@@ -78,7 +65,8 @@ func (svv *SemverVals) AddSVStringParam(
 		prefix = svv.Prefix + "-"
 	}
 
-	addSVGroup(ps)
+	ps.AddGroup(semverGroupName,
+		"common parameters concerned with "+semver.Names)
 
 	ps.Add(prefix+"semver", &SVSetter{Value: &svv.SemVer},
 		"specify the "+semver.Name+" to be used",
@@ -98,7 +86,6 @@ func (svv *SemverVals) AddIDParams(ps *param.PSet, svCks *SemverChecks) error {
 		prefix = svv.Prefix + "-"
 	}
 
-	addSVGroup(ps)
 	ps.Add(prefix+"pre-rel-IDs",
 		psetter.StrList{
 			Value:            &svv.PreRelIDs,
