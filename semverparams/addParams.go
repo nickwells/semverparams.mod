@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/nickwells/check.mod/check"
-	"github.com/nickwells/checksetter.mod/v3/checksetter"
+	"github.com/nickwells/check.mod/v2/check"
+	"github.com/nickwells/checksetter.mod/v4/checksetter"
 	"github.com/nickwells/param.mod/v5/param"
 	"github.com/nickwells/param.mod/v5/param/psetter"
-	"github.com/nickwells/semver.mod/semver"
+	"github.com/nickwells/semver.mod/v2/semver"
 )
 
 // SemVer is a semantic version number that will be set by the parameter
@@ -83,9 +83,9 @@ func AddIDParams(ps *param.PSet) error {
 		psetter.StrList{
 			Value:            &PreRelIDs,
 			StrListSeparator: psetter.StrListSeparator{Sep: "."},
-			Checks: []check.StringSlice{
-				semver.CheckAllPreRelIDs,
-				check.StringSliceLenGT(0),
+			Checks: []check.ValCk[[]string]{
+				check.SliceAll[[]string](semver.CheckPreRelID),
+				check.SliceLength[[]string](check.ValGT(0)),
 			},
 		},
 		"specify a non-empty list of pre-release IDs"+
@@ -98,9 +98,9 @@ func AddIDParams(ps *param.PSet) error {
 		psetter.StrList{
 			Value:            &BuildIDs,
 			StrListSeparator: psetter.StrListSeparator{Sep: "."},
-			Checks: []check.StringSlice{
-				semver.CheckAllBuildIDs,
-				check.StringSliceLenGT(0),
+			Checks: []check.ValCk[[]string]{
+				check.SliceAll[[]string](semver.CheckBuildID),
+				check.SliceLength[[]string](check.ValGT(0)),
 			},
 		},
 		"specify a non-empty list of build IDs"+
@@ -123,8 +123,10 @@ func AddIDCheckerParams(ps *param.PSet) error {
 	const paramDescIntro = "specify a non-empty list of check functions to apply"
 
 	ps.Add("pre-rel-ID-checks",
-		checksetter.StringSlice{
+		&checksetter.Setter[[]string]{
 			Value: &PreRelIDChecks,
+			Parser: checksetter.FindParserOrPanic[[]string](
+				checksetter.StringSliceCheckerName),
 		},
 		paramDescIntro+" to the pre-release IDs for the "+semver.Name,
 		param.AltName("prID-checks"),
@@ -132,8 +134,10 @@ func AddIDCheckerParams(ps *param.PSet) error {
 	)
 
 	ps.Add("build-ID-checks",
-		checksetter.StringSlice{
+		&checksetter.Setter[[]string]{
 			Value: &BuildIDChecks,
+			Parser: checksetter.FindParserOrPanic[[]string](
+				checksetter.StringSliceCheckerName),
 		},
 		paramDescIntro+" to the build IDs for the "+semver.Name,
 		param.AltName("bldID-checks"),
