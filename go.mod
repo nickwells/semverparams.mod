@@ -6,7 +6,7 @@ require (
 	github.com/nickwells/errutil.mod v1.2.11
 	github.com/nickwells/filecheck.mod v1.1.19
 	github.com/nickwells/param.mod/v5 v5.16.1
-	github.com/nickwells/semver.mod/v3 v3.0.0
+	github.com/nickwells/semver.mod/v3 v3.1.0
 	github.com/nickwells/testhelper.mod/v2 v2.1.2
 	github.com/nickwells/xdg.mod v1.0.9
 )

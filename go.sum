@@ -18,8 +18,8 @@ github.com/nickwells/pager.mod v1.0.11 h1:actfWhNh1TPtRpMPwJcRvYeuL2iRd+JQ44l+4K
 github.com/nickwells/pager.mod v1.0.11/go.mod h1:rRmwJHKd/xaSpi/xqJv7P7IJUtFeoJ9s/8yoJ+mh+tM=
 github.com/nickwells/param.mod/v5 v5.16.1 h1:ukLoWcp0Pddb4uyYjRD4EmpkqFntHMhhR3TjPxF/ZYM=
 github.com/nickwells/param.mod/v5 v5.16.1/go.mod h1:6cRX2AVVZrxg0prYh9jxZFswh8mo2aFLeH+pR4wpEr8=
-github.com/nickwells/semver.mod/v3 v3.0.0 h1:kpYf5mrBZYjsl7ihU8TByQrJ3OEApMWMPyNV7PmqnxA=
-github.com/nickwells/semver.mod/v3 v3.0.0/go.mod h1:ooRIco98LVoM+QgiOCL9EdRyxMgAUCKJ492avuua2EM=
+github.com/nickwells/semver.mod/v3 v3.1.0 h1:TviU4/bl8860VgLBX/2JCiC9OcxYUrvQZ3dqaB8gOYI=
+github.com/nickwells/semver.mod/v3 v3.1.0/go.mod h1:ooRIco98LVoM+QgiOCL9EdRyxMgAUCKJ492avuua2EM=
 github.com/nickwells/strdist.mod v1.1.10 h1:QPZlHiqO4/4+yo5DDIQGjEFEsAvOkgBsom0ySvmTgqQ=
 github.com/nickwells/strdist.mod v1.1.10/go.mod h1:rpgO+H9ZFC2ZYPx9hzbOt0dOEZ5mC4UrHzDWzS9wGg0=
 github.com/nickwells/tempus.mod v1.0.2 h1:GzlgNdgp9S0tB1txuB+GKd2leOThl5AKC1Ab9RU39as=
