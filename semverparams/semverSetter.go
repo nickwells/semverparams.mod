@@ -2,30 +2,28 @@ package semverparams
 
 import (
 	"github.com/nickwells/param.mod/v5/param/psetter"
-	"github.com/nickwells/semver.mod/v2/semver"
+	"github.com/nickwells/semver.mod/v3/semver"
 )
 
 // SVSetter is a parameter setter which will set a semantic version
 // number. It satisfies the param.Setter interface and so can be used when
 // specifying a command line argument using the param package.
-//
-// Note that you need to initialise the Value field with the address of a
-// pointer to a semver.SV.
 type SVSetter struct {
 	psetter.ValueReqMandatory
 
-	Value **semver.SV
+	Value *semver.SV
 }
 
 // SetWithVal checks that the parameter value meets the checks if any. It
 // returns an error if the check is not satisfied. Only if the check
 // is not violated is the Value set.
-func (svs *SVSetter) SetWithVal(_ string, paramVal string) error {
+func (svs SVSetter) SetWithVal(_ string, paramVal string) error {
 	v, err := semver.ParseSV(paramVal)
 	if err != nil {
 		return err
 	}
-	*svs.Value = v
+	v.CopyInto(svs.Value)
+
 	return nil
 }
 
@@ -40,10 +38,7 @@ func (svs SVSetter) AllowedValues() string {
 
 // CurrentValue returns the current setting of the parameter value
 func (svs SVSetter) CurrentValue() string {
-	if (*svs.Value) == nil {
-		return "none"
-	}
-	return (*svs.Value).String()
+	return svs.Value.String()
 }
 
 // CheckSetter panics if the setter has not been properly created

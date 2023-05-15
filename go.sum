@@ -18,8 +18,8 @@ github.com/nickwells/pager.mod v1.0.11 h1:actfWhNh1TPtRpMPwJcRvYeuL2iRd+JQ44l+4K
 github.com/nickwells/pager.mod v1.0.11/go.mod h1:rRmwJHKd/xaSpi/xqJv7P7IJUtFeoJ9s/8yoJ+mh+tM=
 github.com/nickwells/param.mod/v5 v5.16.1 h1:ukLoWcp0Pddb4uyYjRD4EmpkqFntHMhhR3TjPxF/ZYM=
 github.com/nickwells/param.mod/v5 v5.16.1/go.mod h1:6cRX2AVVZrxg0prYh9jxZFswh8mo2aFLeH+pR4wpEr8=
-github.com/nickwells/semver.mod/v2 v2.0.8 h1:n/a3OQCk9rP4RnJH5MS3opkmMZ3ZSbwXOpXEw0Vcr9A=
-github.com/nickwells/semver.mod/v2 v2.0.8/go.mod h1:gZprqZruvm285xQDEwnW8OVya2uRhuP64a/u/Svj4Os=
+github.com/nickwells/semver.mod/v3 v3.0.0 h1:kpYf5mrBZYjsl7ihU8TByQrJ3OEApMWMPyNV7PmqnxA=
+github.com/nickwells/semver.mod/v3 v3.0.0/go.mod h1:ooRIco98LVoM+QgiOCL9EdRyxMgAUCKJ492avuua2EM=
 github.com/nickwells/strdist.mod v1.1.10 h1:QPZlHiqO4/4+yo5DDIQGjEFEsAvOkgBsom0ySvmTgqQ=
 github.com/nickwells/strdist.mod v1.1.10/go.mod h1:rpgO+H9ZFC2ZYPx9hzbOt0dOEZ5mC4UrHzDWzS9wGg0=
 github.com/nickwells/tempus.mod v1.0.2 h1:GzlgNdgp9S0tB1txuB+GKd2leOThl5AKC1Ab9RU39as=
@@ -31,8 +31,8 @@ github.com/nickwells/twrap.mod v1.5.1 h1:Vir3VhB81nvR5JCerFQdO15E6QRQellyjKWwsId
 github.com/nickwells/twrap.mod v1.5.1/go.mod h1:4fj194ZRBBkoXfwpOYwRcT0I/4W4+402h0BMOxptp4k=
 github.com/nickwells/xdg.mod v1.0.9 h1:IQhytP6QBCC2xrSVXTE0GDbYJSD8E25H6sSqd7jtCHA=
 github.com/nickwells/xdg.mod v1.0.9/go.mod h1:WbQC4EaiIUSCgzmgYCqGq1zhYnWDe+pBODhx8HzlStM=
-golang.org/x/exp v0.0.0-20230425010034-47ecfdc1ba53 h1:5llv2sWeaMSnA3w2kS57ouQQ4pudlXrR0dCgw51QK9o=
-golang.org/x/exp v0.0.0-20230425010034-47ecfdc1ba53/go.mod h1:V1LtkGg67GoY2N1AnLN78QLrzxkLyJw7RJb1gzOOz9w=
+golang.org/x/exp v0.0.0-20230510235704-dd950f8aeaea h1:vLCWI/yYrdEHyN2JzIzPO3aaQJHQdp89IZBA/+azVC4=
+golang.org/x/exp v0.0.0-20230510235704-dd950f8aeaea/go.mod h1:V1LtkGg67GoY2N1AnLN78QLrzxkLyJw7RJb1gzOOz9w=
 golang.org/x/sys v0.8.0 h1:EBmGv8NaZBZTWvrbjNoL6HVt+IVy3QDQpJs7VRIw3tU=
 golang.org/x/sys v0.8.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/term v0.8.0 h1:n5xxQn2i3PC0yLAbjTpNT85q/Kgzcr2gIoX9OrJUols=

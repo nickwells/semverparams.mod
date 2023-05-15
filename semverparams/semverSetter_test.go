@@ -3,8 +3,8 @@ package semverparams_test
 import (
 	"testing"
 
-	"github.com/nickwells/semver.mod/v2/semver"
-	"github.com/nickwells/semverparams.mod/v4/semverparams"
+	"github.com/nickwells/semver.mod/v3/semver"
+	"github.com/nickwells/semverparams.mod/v5/semverparams"
 	"github.com/nickwells/testhelper.mod/v2/testhelper"
 )
 
@@ -29,19 +29,19 @@ func TestSetter(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
-		var sv *semver.SV
+		var sv semver.SV
 		svs := semverparams.SVSetter{Value: &sv}
 
-		testhelper.DiffString(t, tc.IDStr(), "expected value",
-			svs.CurrentValue(), "none")
+		testhelper.DiffString(t, tc.IDStr(), "semantic version number",
+			svs.CurrentValue(), "")
 		err := svs.SetWithVal("", tc.paramVal)
 		if testhelper.CheckExpErr(t, err, tc) && err == nil {
-			testhelper.DiffString(t, tc.IDStr(), "expected value",
+			testhelper.DiffString(t, tc.IDStr(), "semantic version number",
 				svs.CurrentValue(), tc.expVal)
 		}
 	}
 
-	var sv *semver.SV
+	var sv semver.SV
 	checkSetterTests := []struct {
 		testhelper.ID
 		testhelper.ExpPanic

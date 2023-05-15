@@ -7,15 +7,22 @@ import (
 	"github.com/nickwells/checksetter.mod/v4/checksetter"
 	"github.com/nickwells/param.mod/v5/param"
 	"github.com/nickwells/param.mod/v5/param/psetter"
-	"github.com/nickwells/semver.mod/v2/semver"
+	"github.com/nickwells/semver.mod/v3/semver"
 )
 
 // SemverVals holds the semantic version ID values - the version ID and any
-// pre-release or build IDs
+// pre-release or build IDs. If you want to have multiple SemverVals one can
+// have an empty Prefix but each of the rest will need to have its own
+// distinct Prefix. When you add the parameters for these they will all
+// appear in the same parameter group.
 type SemverVals struct {
 	// Prefix is the optional prefix to apply to the parameter names. If it
 	// is not empty it will be separated from the rest of the parameter name
 	// with '-'.
+	//
+	// Note that it must be suitable to be part of a parameter name (it must
+	// start with a letter and be followed with letters, digits or dashes
+	// '-')
 	Prefix string
 
 	// Desc is optional text to appear at the start of any errors reported by
@@ -27,22 +34,50 @@ type SemverVals struct {
 	// parsing if it is passed to the program
 	SemVer *semver.SV
 
+	// SemverAttrs gives the attributes to be applied to the parameter for
+	// setting the SemVer
+	SemverAttrs param.Attributes
+
 	// PreRelIDs is a list of Pre-Release IDs that will be set by the parameter
 	// parsing if the list is passed to the program
 	PreRelIDs []string
 
+	// PreRelIDAttrs gives the attributes to be applied to the parameter for
+	// setting the pre-release IDs
+	PreRelIDAttrs param.Attributes
+
 	// BuildIDs is a list of Build IDs that will be set by the parameter parsing
 	// if the list is passed to the program
 	BuildIDs []string
+
+	// BuildIDAttrs gives the attributes to be applied to the parameter for
+	// setting the build IDs
+	BuildIDAttrs param.Attributes
 }
 
 // SemverChecks holds the checks to be applied to the pre-release and build
-// IDs
+// IDs. If you want to have multiple SemverChecks each will need its own
+// distinct Name. Each set of parameters will appear in their own parameter
+// group, only the group with an empty Name will have an associated group
+// config file.
 type SemverChecks struct {
-	// Prefix is the optional prefix to apply to the parameter names. If it
-	// is not empty it will be separated from the rest of the parameter name
-	// with '-'.
-	Prefix string
+	// Name, if not empty, will be applied as a prefix to the parameter
+	// names, separated from the rest of the parameter name with '-'. The
+	// Name is also used as a suffix to the group name so that all the
+	// parameters with the same prefix appear in a group of their own with a
+	// name reflecting their prefix.
+	//
+	// Note that it must be suitable to be part of a parameter name (it must
+	// start with a letter and be followed with letters, digits or dashes
+	// '-')
+	//
+	// Only the default group (with Name == "") has an associated group
+	// config file
+	Name string
+
+	// Desc will be added to the description of the parameter group and to
+	// each of the check-setting parameters' help text
+	Desc string
 
 	// PreRelIDChecks is a list of checks to be applied to the pre-release IDs
 	PreRelIDChecks []check.ValCk[[]string]
@@ -56,117 +91,92 @@ const (
 	semverChecksGroupName = "semver-checks"
 )
 
-// AddSVStringParam will add a parameter for setting the semantic version
-// number to the passed PSet
-func (svv *SemverVals) AddSVStringParam(
-	ps *param.PSet, attrs param.Attributes) error {
-	prefix := ""
-	if svv.Prefix != "" {
-		prefix = svv.Prefix + "-"
-	}
-
+func AddSemverGroup(ps *param.PSet) error {
 	ps.AddGroup(semverGroupName,
 		"common parameters concerned with "+semver.Names)
-
-	ps.Add(prefix+"semver", &SVSetter{Value: &svv.SemVer},
-		"specify the "+semver.Name+" to be used",
-		param.AltNames(prefix+"svn"),
-		param.GroupName(semverGroupName),
-		param.Attrs(attrs),
-	)
-
 	return nil
 }
 
-// AddIDParams will add parameters for setting the pre-release and build IDs
-// of a semantic version number to the passed PSet
-func (svv *SemverVals) AddIDParams(ps *param.PSet, svCks *SemverChecks) error {
-	prefix := ""
-	if svv.Prefix != "" {
-		prefix = svv.Prefix + "-"
+// AddSemverParam returns a function that will add a parameter for setting
+// the semantic version number to the passed PSet
+func (svv *SemverVals) AddSemverParam(svCks *SemverChecks) param.PSetOptFunc {
+	return func(ps *param.PSet) error {
+		prefix := ""
+		if svv.Prefix != "" {
+			prefix = svv.Prefix + "-"
+		}
+
+		ps.Add(prefix+"semver", SVSetter{Value: svv.SemVer},
+			"specify the "+semver.Name+" to be used",
+			param.AltNames(prefix+"svn"),
+			param.GroupName(semverGroupName),
+			param.Attrs(svv.SemverAttrs),
+		)
+
+		if svCks != nil {
+			ps.AddFinalCheck(
+				checkSemverIDs(svv, svCks))
+		}
+
+		return nil
 	}
-
-	ps.Add(prefix+"pre-rel-IDs",
-		psetter.StrList{
-			Value:            &svv.PreRelIDs,
-			StrListSeparator: psetter.StrListSeparator{Sep: "."},
-			Checks: []check.ValCk[[]string]{
-				check.SliceAll[[]string](semver.CheckPreRelID),
-				check.SliceLength[[]string](check.ValGT(0)),
-			},
-		},
-		"specify a non-empty list of pre-release IDs"+
-			" suitable for setting on a "+semver.Name,
-		param.AltNames(prefix+"prIDs"),
-		param.GroupName(semverGroupName),
-	)
-
-	ps.Add(prefix+"build-IDs",
-		psetter.StrList{
-			Value:            &svv.BuildIDs,
-			StrListSeparator: psetter.StrListSeparator{Sep: "."},
-			Checks: []check.ValCk[[]string]{
-				check.SliceAll[[]string](semver.CheckBuildID),
-				check.SliceLength[[]string](check.ValGT(0)),
-			},
-		},
-		"specify a non-empty list of build IDs"+
-			" suitable for setting on a "+semver.Name,
-		param.AltNames(prefix+"bldIDs"),
-		param.GroupName(semverGroupName),
-	)
-
-	if svCks != nil {
-		ps.AddFinalCheck(checkIDs(svv, svCks))
-	}
-
-	return nil
 }
 
-// AddIDCheckerParams will add parameters for setting the checks to be
-// applied to any pre-release and build IDs of a semantic version number.
-func (svCks *SemverChecks) AddIDCheckerParams(ps *param.PSet) error {
-	prefix := ""
-	if svCks.Prefix != "" {
-		prefix = svCks.Prefix + "-"
+// AddIDParams returns a function that will add parameters for setting the
+// pre-release and build IDs of a semantic version number to the passed
+// PSet. If a non-nil SemverChecks is passed then a final check is added of
+// the pre-release and build IDs against the checks, if any, given by the
+// SemverChecks
+func (svv *SemverVals) AddIDParams(svCks *SemverChecks) param.PSetOptFunc {
+	return func(ps *param.PSet) error {
+		prefix := ""
+		if svv.Prefix != "" {
+			prefix = svv.Prefix + "-"
+		}
+
+		ps.Add(prefix+"pre-rel-IDs",
+			psetter.StrList{
+				Value:            &svv.PreRelIDs,
+				StrListSeparator: psetter.StrListSeparator{Sep: "."},
+				Checks: []check.ValCk[[]string]{
+					check.SliceAll[[]string](semver.CheckPreRelID),
+					check.SliceLength[[]string](check.ValGT(0)),
+				},
+			},
+			"specify a non-empty list of pre-release IDs"+
+				" suitable for setting on a "+semver.Name,
+			param.AltNames(prefix+"prIDs"),
+			param.GroupName(semverGroupName),
+			param.Attrs(svv.PreRelIDAttrs),
+		)
+
+		ps.Add(prefix+"build-IDs",
+			psetter.StrList{
+				Value:            &svv.BuildIDs,
+				StrListSeparator: psetter.StrListSeparator{Sep: "."},
+				Checks: []check.ValCk[[]string]{
+					check.SliceAll[[]string](semver.CheckBuildID),
+					check.SliceLength[[]string](check.ValGT(0)),
+				},
+			},
+			"specify a non-empty list of build IDs"+
+				" suitable for setting on a "+semver.Name,
+			param.AltNames(prefix+"bldIDs"),
+			param.GroupName(semverGroupName),
+			param.Attrs(svv.BuildIDAttrs),
+		)
+
+		if svCks != nil {
+			ps.AddFinalCheck(
+				checkIDs(svv, svCks))
+		}
+
+		return nil
 	}
-
-	ps.AddGroup(semverChecksGroupName,
-		"common parameters for specifying checks on "+
-			semver.Name+
-			" (pre-release and build IDs)")
-	_ = setGlobalConfigFileForGroupSemverChecks(ps)
-	_ = setConfigFileForGroupSemverChecks(ps)
-
-	const paramDescIntro = "give a non-empty list of check functions to apply"
-
-	ps.Add(prefix+"pre-rel-ID-checks",
-		&checksetter.Setter[[]string]{
-			Value: &svCks.PreRelIDChecks,
-			Parser: checksetter.FindParserOrPanic[[]string](
-				checksetter.StringSliceCheckerName),
-		},
-		paramDescIntro+" to the pre-release IDs for the "+semver.Name,
-		param.AltNames(prefix+"prID-checks"),
-		param.GroupName(semverChecksGroupName),
-	)
-
-	ps.Add(prefix+"build-ID-checks",
-		&checksetter.Setter[[]string]{
-			Value: &svCks.BuildIDChecks,
-			Parser: checksetter.FindParserOrPanic[[]string](
-				checksetter.StringSliceCheckerName),
-		},
-		paramDescIntro+" to the build IDs for the "+semver.Name,
-		param.AltNames(prefix+"bldID-checks"),
-		param.GroupName(semverChecksGroupName),
-	)
-
-	return nil
 }
 
 // checkIDs checks that any supplied IDs conform to the specified checks
-func checkIDs(svv *SemverVals, svCks *SemverChecks) func() error {
+func checkIDs(svv *SemverVals, svCks *SemverChecks) param.FinalCheckFunc {
 	return func() error {
 		errPfx := ""
 		if svv.Desc != "" {
@@ -185,6 +195,86 @@ func checkIDs(svv *SemverVals, svCks *SemverChecks) func() error {
 				return fmt.Errorf("%sBad BuildIDs: %s", errPfx, err)
 			}
 		}
+
+		return nil
+	}
+}
+
+// checkSemverIDs checks that the pre-release and build IDs on the semver
+// conform to the specified checks
+func checkSemverIDs(svv *SemverVals, svCks *SemverChecks) param.FinalCheckFunc {
+	return func() error {
+		errPfx := ""
+		if svv.Desc != "" {
+			errPfx = svv.Desc + ": "
+		}
+		for _, chk := range svCks.PreRelIDChecks {
+			err := chk(svv.SemVer.PreRelIDs())
+			if err != nil {
+				return fmt.Errorf("%sBad PreRelIDs: %s", errPfx, err)
+			}
+		}
+
+		for _, chk := range svCks.BuildIDChecks {
+			err := chk(svv.SemVer.BuildIDs())
+			if err != nil {
+				return fmt.Errorf("%sBad BuildIDs: %s", errPfx, err)
+			}
+		}
+
+		return nil
+	}
+}
+
+// AddCheckParams will add parameters for setting the checks to be
+// applied to any pre-release and build IDs of a semantic version number.
+func (svCks *SemverChecks) AddCheckParams() param.PSetOptFunc {
+	return func(ps *param.PSet) error {
+		prefix := ""
+		groupName := semverChecksGroupName
+		if svCks.Name != "" {
+			prefix = svCks.Name + "-"
+			groupName += "-" + svCks.Name
+		}
+
+		ps.AddGroup(groupName,
+			"common parameters for specifying checks on "+
+				semver.Name+
+				" (pre-release and build IDs)"+svCks.Desc)
+
+		if svCks.Name == "" {
+			_ = setGlobalConfigFileForGroupSemverChecks(ps)
+			_ = setConfigFileForGroupSemverChecks(ps)
+		}
+
+		helpText := func(part string) string {
+			return fmt.Sprintf(
+				"give a non-empty list of check functions"+
+					" to apply to the %s for the %s%s",
+				part, semver.Name, svCks.Desc)
+		}
+
+		ps.Add(prefix+"pre-rel-ID-checks",
+			&checksetter.Setter[[]string]{
+				Value: &svCks.PreRelIDChecks,
+				Parser: checksetter.FindParserOrPanic[[]string](
+					checksetter.StringSliceCheckerName),
+			},
+			helpText("pre-release IDs"),
+			param.AltNames(prefix+"prID-checks"),
+			param.GroupName(groupName),
+		)
+
+		ps.Add(prefix+"build-ID-checks",
+			&checksetter.Setter[[]string]{
+				Value: &svCks.BuildIDChecks,
+				Parser: checksetter.FindParserOrPanic[[]string](
+					checksetter.StringSliceCheckerName),
+			},
+			helpText("build IDs"),
+			param.AltNames(prefix+"bldID-checks"),
+			param.GroupName(groupName),
+		)
 
 		return nil
 	}

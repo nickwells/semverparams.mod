@@ -1,4 +1,4 @@
-module github.com/nickwells/semverparams.mod/v4
+module github.com/nickwells/semverparams.mod/v5
 
 require (
 	github.com/nickwells/check.mod/v2 v2.1.9
@@ -6,7 +6,7 @@ require (
 	github.com/nickwells/errutil.mod v1.2.11
 	github.com/nickwells/filecheck.mod v1.1.19
 	github.com/nickwells/param.mod/v5 v5.16.1
-	github.com/nickwells/semver.mod/v2 v2.0.8
+	github.com/nickwells/semver.mod/v3 v3.0.0
 	github.com/nickwells/testhelper.mod/v2 v2.1.2
 	github.com/nickwells/xdg.mod v1.0.9
 )
@@ -20,7 +20,7 @@ require (
 	github.com/nickwells/strdist.mod v1.1.10 // indirect
 	github.com/nickwells/tempus.mod v1.0.2 // indirect
 	github.com/nickwells/twrap.mod v1.5.1 // indirect
-	golang.org/x/exp v0.0.0-20230425010034-47ecfdc1ba53 // indirect
+	golang.org/x/exp v0.0.0-20230510235704-dd950f8aeaea // indirect
 	golang.org/x/sys v0.8.0 // indirect
 	golang.org/x/term v0.8.0 // indirect
 )
