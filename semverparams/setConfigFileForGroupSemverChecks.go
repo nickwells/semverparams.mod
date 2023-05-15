@@ -30,7 +30,7 @@ func setConfigFileForGroupSemverChecks(ps *param.PSet) error {
 			"github.com",
 			"nickwells",
 			"semverparams.mod",
-			"v5",
+			"v6",
 			"semverparams",
 			"group-semver-checks.cfg"),
 		filecheck.Optional)
@@ -59,7 +59,7 @@ func setGlobalConfigFileForGroupSemverChecks(ps *param.PSet) error {
 			"github.com",
 			"nickwells",
 			"semverparams.mod",
-			"v5",
+			"v6",
 			"semverparams",
 			"group-semver-checks.cfg"),
 		filecheck.Optional)

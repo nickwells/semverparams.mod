@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/nickwells/semver.mod/v3/semver"
-	"github.com/nickwells/semverparams.mod/v5/semverparams"
+	"github.com/nickwells/semverparams.mod/v6/semverparams"
 	"github.com/nickwells/testhelper.mod/v2/testhelper"
 )
 

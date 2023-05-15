@@ -1,4 +1,4 @@
-module github.com/nickwells/semverparams.mod/v5
+module github.com/nickwells/semverparams.mod/v6
 
 require (
 	github.com/nickwells/check.mod/v2 v2.1.9

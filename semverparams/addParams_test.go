@@ -9,7 +9,7 @@ import (
 	"github.com/nickwells/param.mod/v5/param/paramset"
 	"github.com/nickwells/param.mod/v5/paramtest"
 	"github.com/nickwells/semver.mod/v3/semver"
-	"github.com/nickwells/semverparams.mod/v5/semverparams"
+	"github.com/nickwells/semverparams.mod/v6/semverparams"
 	"github.com/nickwells/testhelper.mod/v2/testhelper"
 )
 
@@ -75,11 +75,9 @@ func TestParse(t *testing.T) {
 	testCases := []paramtest.Parser{}
 
 	{
-		svvInit := semverparams.SemverVals{
-			SemVer: &semver.SV{},
-		}
+		svvInit := semverparams.SemverVals{}
 		svvExp := semverparams.SemverVals{
-			SemVer: semver.NewSVOrPanic(1, 2, 3, nil, nil),
+			SemVer: *semver.NewSVOrPanic(1, 2, 3, nil, nil),
 		}
 
 		testCases = append(testCases,
@@ -92,11 +90,10 @@ func TestParse(t *testing.T) {
 	{
 		svvInit := semverparams.SemverVals{
 			Prefix: "a",
-			SemVer: &semver.SV{},
 		}
 		svvExp := semverparams.SemverVals{
 			Prefix: "a",
-			SemVer: semver.NewSVOrPanic(1, 2, 3, nil, nil),
+			SemVer: *semver.NewSVOrPanic(1, 2, 3, nil, nil),
 		}
 
 		testCases = append(testCases,
@@ -107,12 +104,10 @@ func TestParse(t *testing.T) {
 				"-a-semver", "v1.2.3"))
 	}
 	{
-		svvInit := semverparams.SemverVals{
-			SemVer: &semver.SV{},
-		}
+		svvInit := semverparams.SemverVals{}
 		svCksInit := semverparams.SemverChecks{}
 		svvExp := semverparams.SemverVals{
-			SemVer: semver.NewSVOrPanic(1, 2, 3,
+			SemVer: *semver.NewSVOrPanic(1, 2, 3,
 				[]string{"rc", "1"}, nil),
 		}
 		svCksExp := semverparams.SemverChecks{}
@@ -134,12 +129,10 @@ func TestParse(t *testing.T) {
 					`))`))
 	}
 	{
-		svvInit := semverparams.SemverVals{
-			SemVer: &semver.SV{},
-		}
+		svvInit := semverparams.SemverVals{}
 		svCksInit := semverparams.SemverChecks{}
 		svvExp := semverparams.SemverVals{
-			SemVer: semver.NewSVOrPanic(1, 2, 3,
+			SemVer: *semver.NewSVOrPanic(1, 2, 3,
 				nil, []string{"rc", "1"}),
 		}
 		svCksExp := semverparams.SemverChecks{}
@@ -171,13 +164,11 @@ func TestParse(t *testing.T) {
 				" the length of the list (3) is incorrect:"+
 				" the value (3) must equal 2)"))
 
-		svvInit := semverparams.SemverVals{
-			SemVer: &semver.SV{},
-		}
+		svvInit := semverparams.SemverVals{}
 		svCksInit := semverparams.SemverChecks{}
 		svvExp := semverparams.SemverVals{
 			// The Final Checks don't prevent the value being set
-			SemVer: semver.NewSVOrPanic(1, 2, 3,
+			SemVer: *semver.NewSVOrPanic(1, 2, 3,
 				[]string{"rc", "1", "x"}, nil),
 		}
 		svCksExp := semverparams.SemverChecks{}
@@ -209,13 +200,11 @@ func TestParse(t *testing.T) {
 				" the length of the list (3) is incorrect:"+
 				" the value (3) must equal 2)"))
 
-		svvInit := semverparams.SemverVals{
-			SemVer: &semver.SV{},
-		}
+		svvInit := semverparams.SemverVals{}
 		svCksInit := semverparams.SemverChecks{}
 		svvExp := semverparams.SemverVals{
 			// The Final Checks don't prevent the value being set
-			SemVer: semver.NewSVOrPanic(1, 2, 3,
+			SemVer: *semver.NewSVOrPanic(1, 2, 3,
 				nil, []string{"rc", "1", "x"}),
 		}
 		svCksExp := semverparams.SemverChecks{}
@@ -251,13 +240,11 @@ func TestParse(t *testing.T) {
 		svvInit := semverparams.SemverVals{
 			Prefix: "test-pfx",
 			Desc:   desc,
-			SemVer: &semver.SV{},
 		}
 		svCksInit := semverparams.SemverChecks{Name: "test-name"}
 		svvExp := semverparams.SemverVals{
 			Prefix:    "test-pfx",
 			Desc:      desc,
-			SemVer:    &semver.SV{},
 			PreRelIDs: []string{"rc", "1", "x"},
 		}
 		svCksExp := semverparams.SemverChecks{}
@@ -291,13 +278,11 @@ func TestParse(t *testing.T) {
 				" the value (3) must equal 2)"))
 
 		svvInit := semverparams.SemverVals{
-			Desc:   desc,
-			SemVer: &semver.SV{},
+			Desc: desc,
 		}
 		svCksInit := semverparams.SemverChecks{Name: "test-name"}
 		svvExp := semverparams.SemverVals{
 			Desc:     desc,
-			SemVer:   &semver.SV{},
 			BuildIDs: []string{"rc", "1", "x"},
 		}
 		svCksExp := semverparams.SemverChecks{}

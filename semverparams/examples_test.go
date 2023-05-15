@@ -4,14 +4,13 @@ import (
 	"fmt"
 
 	"github.com/nickwells/param.mod/v5/param/paramset"
-	"github.com/nickwells/semver.mod/v3/semver"
-	"github.com/nickwells/semverparams.mod/v5/semverparams"
+	"github.com/nickwells/semverparams.mod/v6/semverparams"
 )
 
 // Example demonstrates how to use the package to add semantic versioning
 // parameters to your program interface
 func Example() {
-	svp := semverparams.SemverVals{SemVer: &semver.SV{}}
+	svp := semverparams.SemverVals{}
 	ps := paramset.NewOrDie(
 		semverparams.AddSemverGroup,
 		svp.AddSemverParam(nil),
@@ -38,7 +37,7 @@ func Example() {
 // IDs pass the supplied checks.
 func Example_withChecks() {
 	svc := semverparams.SemverChecks{}
-	svp := semverparams.SemverVals{SemVer: &semver.SV{}}
+	svp := semverparams.SemverVals{}
 
 	ps := paramset.NewOrDie(
 		semverparams.AddSemverGroup,
@@ -68,7 +67,7 @@ func Example_withChecks() {
 // shows the behaviour when user-supplied checks fail.
 func Example_withFailingChecks() {
 	svc := semverparams.SemverChecks{}
-	svp := semverparams.SemverVals{SemVer: &semver.SV{}}
+	svp := semverparams.SemverVals{}
 
 	// we use a testing-specific paramset generator to suppress the
 	// exit-on-error and error reporting behaviour
@@ -103,8 +102,8 @@ func Example_withFailingChecks() {
 // you can have multiple parameters, some checked, some not.
 func Example_unchecked() {
 	svc := semverparams.SemverChecks{}
-	svp1 := semverparams.SemverVals{SemVer: &semver.SV{}}
-	svp2 := semverparams.SemverVals{Prefix: "sv2", SemVer: &semver.SV{}}
+	svp1 := semverparams.SemverVals{}
+	svp2 := semverparams.SemverVals{Prefix: "sv2"}
 
 	ps := paramset.NewOrDie(
 		semverparams.AddSemverGroup,

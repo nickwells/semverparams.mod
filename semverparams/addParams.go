@@ -32,7 +32,7 @@ type SemverVals struct {
 
 	// SemVer is a semantic version number that will be set by the parameter
 	// parsing if it is passed to the program
-	SemVer *semver.SV
+	SemVer semver.SV
 
 	// SemverAttrs gives the attributes to be applied to the parameter for
 	// setting the SemVer
@@ -106,7 +106,7 @@ func (svv *SemverVals) AddSemverParam(svCks *SemverChecks) param.PSetOptFunc {
 			prefix = svv.Prefix + "-"
 		}
 
-		ps.Add(prefix+"semver", SVSetter{Value: svv.SemVer},
+		ps.Add(prefix+"semver", SVSetter{Value: &svv.SemVer},
 			"specify the "+semver.Name+" to be used",
 			param.AltNames(prefix+"svn"),
 			param.GroupName(semverGroupName),
