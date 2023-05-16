@@ -49,7 +49,11 @@ func cmpSemverPairs(iVal, iExpVal any) error {
 		return errors.New("Bad expected value: not a semverPair struct")
 	}
 
-	return testhelper.DiffVals(val, expVal, []string{"svCks"})
+	return testhelper.DiffVals(val, expVal,
+		[]string{"svCks"},
+		[]string{"svv", "semverParam"},
+		[]string{"svv", "preRelIDsParam"},
+		[]string{"svv", "buildIDsParam"})
 }
 
 // mkTestParser populates and returns a paramtest.Parser ready to be added to

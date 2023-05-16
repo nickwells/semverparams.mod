@@ -33,7 +33,8 @@ type SemverVals struct {
 
 	// SemVer is a semantic version number that will be set by the parameter
 	// parsing if it is passed to the program
-	SemVer semver.SV
+	SemVer      semver.SV
+	semverParam *param.ByName
 
 	// SemverAttrs gives the attributes to be applied to the parameter for
 	// setting the SemVer
@@ -41,7 +42,8 @@ type SemverVals struct {
 
 	// PreRelIDs is a list of Pre-Release IDs that will be set by the parameter
 	// parsing if the list is passed to the program
-	PreRelIDs []string
+	PreRelIDs      []string
+	preRelIDsParam *param.ByName
 
 	// PreRelIDAttrs gives the attributes to be applied to the parameter for
 	// setting the pre-release IDs
@@ -49,11 +51,39 @@ type SemverVals struct {
 
 	// BuildIDs is a list of Build IDs that will be set by the parameter parsing
 	// if the list is passed to the program
-	BuildIDs []string
+	BuildIDs      []string
+	buildIDsParam *param.ByName
 
 	// BuildIDAttrs gives the attributes to be applied to the parameter for
 	// setting the build IDs
 	BuildIDAttrs param.Attributes
+}
+
+// SemVerHasBeenSet returns true if the SemVer value has been set after
+// parameter parsing
+func (svv SemverVals) SemVerHasBeenSet() bool {
+	if svv.semverParam == nil {
+		return false
+	}
+	return svv.semverParam.HasBeenSet()
+}
+
+// PreRelIDsHaveBeenSet returns true if the PreRelIDs value has been set after
+// parameter parsing
+func (svv SemverVals) PreRelIDsHaveBeenSet() bool {
+	if svv.preRelIDsParam == nil {
+		return false
+	}
+	return svv.preRelIDsParam.HasBeenSet()
+}
+
+// BuildIDsHaveBeenSet returns true if the BuildIDs value has been set after
+// parameter parsing
+func (svv SemverVals) BuildIDsHaveBeenSet() bool {
+	if svv.buildIDsParam == nil {
+		return false
+	}
+	return svv.buildIDsParam.HasBeenSet()
 }
 
 // SemverChecks holds the checks to be applied to the pre-release and build
@@ -107,7 +137,7 @@ func (svv *SemverVals) AddSemverParam(svCks *SemverChecks) param.PSetOptFunc {
 			prefix = svv.Prefix + "-"
 		}
 
-		ps.Add(prefix+"semver", SVSetter{Value: &svv.SemVer},
+		svv.semverParam = ps.Add(prefix+"semver", SVSetter{Value: &svv.SemVer},
 			"specify the "+semver.Name+" to be used",
 			param.AltNames(prefix+"svn"),
 			param.GroupName(semverGroupName),
@@ -156,22 +186,32 @@ func (svv *SemverVals) AddIDParams(svCks *SemverChecks) param.PSetOptFunc {
 			prefix = svv.Prefix + "-"
 		}
 
-		ps.Add(prefix+"pre-rel-IDs",
+		var (
+			preRelIDsParamName = prefix + "pre-rel-IDs"
+			buildIDsParamName  = prefix + "build-IDs"
+
+			preRelIDsAltNames = []string{prefix + "prIDs"}
+			buildIDsAltNames  = []string{prefix + "bldIDs"}
+		)
+
+		svv.preRelIDsParam = ps.Add(preRelIDsParamName,
 			IDListSetter(&svv.PreRelIDs, semver.CheckPreRelID),
 			"specify a non-empty list of pre-release IDs"+
 				" suitable for setting on a "+semver.Name,
-			param.AltNames(prefix+"prIDs"),
+			param.AltNames(preRelIDsAltNames...),
 			param.GroupName(semverGroupName),
 			param.Attrs(svv.PreRelIDAttrs),
+			param.SeeAlso(buildIDsParamName),
 		)
 
-		ps.Add(prefix+"build-IDs",
+		svv.buildIDsParam = ps.Add(buildIDsParamName,
 			IDListSetter(&svv.BuildIDs, semver.CheckBuildID),
 			"specify a non-empty list of build IDs"+
 				" suitable for setting on a "+semver.Name,
-			param.AltNames(prefix+"bldIDs"),
+			param.AltNames(buildIDsAltNames...),
 			param.GroupName(semverGroupName),
 			param.Attrs(svv.BuildIDAttrs),
+			param.SeeAlso(preRelIDsParamName),
 		)
 
 		if svCks != nil {
