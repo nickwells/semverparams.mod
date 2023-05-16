@@ -1,6 +1,7 @@
 package semverparams
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/nickwells/check.mod/v2/check"
@@ -122,6 +123,27 @@ func (svv *SemverVals) AddSemverParam(svCks *SemverChecks) param.PSetOptFunc {
 	}
 }
 
+// IDListSetter will return a psetter.StrList correctly constructed for
+// setting a list of semver IDs (either pre-release or build IDs). You should
+// pass the appropriate semver.Check...ID function depending on the type of
+// list of IDs you want to set. It will panic (as this is a coding error) if
+// the idChk function is nil.
+func IDListSetter(val *[]string, idChk check.ValCk[string]) psetter.StrList {
+	if idChk == nil {
+		panic(errors.New(
+			"the function to check the parts of the ID list is nil"))
+	}
+
+	return psetter.StrList{
+		Value:            val,
+		StrListSeparator: psetter.StrListSeparator{Sep: "."},
+		Checks: []check.ValCk[[]string]{
+			check.SliceAll[[]string](idChk),
+			check.SliceLength[[]string](check.ValGT(0)),
+		},
+	}
+}
+
 // AddIDParams returns a function that will add parameters for setting the
 // pre-release and build IDs of a semantic version number to the passed
 // PSet. If a non-nil SemverChecks is passed then a final check is added of
@@ -135,14 +157,7 @@ func (svv *SemverVals) AddIDParams(svCks *SemverChecks) param.PSetOptFunc {
 		}
 
 		ps.Add(prefix+"pre-rel-IDs",
-			psetter.StrList{
-				Value:            &svv.PreRelIDs,
-				StrListSeparator: psetter.StrListSeparator{Sep: "."},
-				Checks: []check.ValCk[[]string]{
-					check.SliceAll[[]string](semver.CheckPreRelID),
-					check.SliceLength[[]string](check.ValGT(0)),
-				},
-			},
+			IDListSetter(&svv.PreRelIDs, semver.CheckPreRelID),
 			"specify a non-empty list of pre-release IDs"+
 				" suitable for setting on a "+semver.Name,
 			param.AltNames(prefix+"prIDs"),
@@ -151,14 +166,7 @@ func (svv *SemverVals) AddIDParams(svCks *SemverChecks) param.PSetOptFunc {
 		)
 
 		ps.Add(prefix+"build-IDs",
-			psetter.StrList{
-				Value:            &svv.BuildIDs,
-				StrListSeparator: psetter.StrListSeparator{Sep: "."},
-				Checks: []check.ValCk[[]string]{
-					check.SliceAll[[]string](semver.CheckBuildID),
-					check.SliceLength[[]string](check.ValGT(0)),
-				},
-			},
+			IDListSetter(&svv.BuildIDs, semver.CheckBuildID),
 			"specify a non-empty list of build IDs"+
 				" suitable for setting on a "+semver.Name,
 			param.AltNames(prefix+"bldIDs"),

@@ -4,6 +4,7 @@ import (
 	"errors"
 	"testing"
 
+	"github.com/nickwells/check.mod/v2/check"
 	"github.com/nickwells/errutil.mod/errutil"
 	"github.com/nickwells/param.mod/v5/param"
 	"github.com/nickwells/param.mod/v5/param/paramset"
@@ -306,5 +307,96 @@ func TestParse(t *testing.T) {
 
 	for _, tc := range testCases {
 		_ = tc.Test(t)
+	}
+}
+
+func TestIDListSetter(t *testing.T) {
+	testCases := []struct {
+		testhelper.ID
+		testhelper.ExpPanic
+		testhelper.ExpErr
+		idChk  check.ValCk[string]
+		args   []string
+		expVal []string
+	}{
+		{
+			ID:    testhelper.MkID("good - pre-rel-ids, no args"),
+			idChk: semver.CheckPreRelID,
+		},
+		{
+			ID:     testhelper.MkID("good - pre-rel-ids, with args"),
+			idChk:  semver.CheckPreRelID,
+			args:   []string{"-set", "a.b.42"},
+			expVal: []string{"a", "b", "42"},
+		},
+		{
+			ID: testhelper.MkID("good - pre-rel-ids, with bad args"),
+			ExpErr: testhelper.MkExpErr(
+				"list entry: 0 (bad,val) does not pass the test:" +
+					" the Pre-Rel ID: 'bad,val' must be" +
+					" a non-empty string of letters, digits or hyphens"),
+			idChk: semver.CheckPreRelID,
+			args:  []string{"-set", "bad,val"},
+		},
+		{
+			ID: testhelper.MkID("good - pre-rel-ids, with bad args: leading 0"),
+			ExpErr: testhelper.MkExpErr(
+				"list entry: 0 (01) does not pass the test:" +
+					" the Pre-Rel ID: '01' must" +
+					" have no leading zero if it's all numeric"),
+			idChk: semver.CheckPreRelID,
+			args:  []string{"-set", "01"},
+		},
+		{
+			ID:    testhelper.MkID("good - build-ids, no args"),
+			idChk: semver.CheckBuildID,
+		},
+		{
+			ID:     testhelper.MkID("good - build-ids, with args"),
+			idChk:  semver.CheckBuildID,
+			args:   []string{"-set", "a.b.42.01"},
+			expVal: []string{"a", "b", "42", "01"},
+		},
+		{
+			ID: testhelper.MkID("good - build-ids, with bad args"),
+			ExpErr: testhelper.MkExpErr(
+				"list entry: 0 (bad,val) does not pass the test:" +
+					" the Build ID: 'bad,val' must be" +
+					" a non-empty string of letters, digits or hyphens"),
+			idChk: semver.CheckBuildID,
+			args:  []string{"-set", "bad,val"},
+		},
+		{
+			ID: testhelper.MkID("bad - nil check"),
+			ExpPanic: testhelper.MkExpPanic(
+				"the function to check the parts of the ID list is nil"),
+		},
+	}
+
+	for _, tc := range testCases {
+		ps, err := paramset.NewNoHelpNoExitNoErrRpt()
+		if err != nil {
+			t.Fatalf("Unexpected error creating the paramset: %v", err)
+		}
+		val := []string{}
+		panicked, panicVal := testhelper.PanicSafe(func() {
+			ps.Add("set", semverparams.IDListSetter(&val, tc.idChk), "help")
+		})
+		if !testhelper.CheckExpPanicError(t, panicked, panicVal, tc) &&
+			!panicked {
+			errMap := ps.Parse(tc.args)
+			if len(errMap) != 0 {
+				for _, v := range errMap {
+					if len(v) > 0 {
+						err = v[0]
+					}
+				}
+			}
+			if testhelper.CheckExpErr(t, err, tc) && err == nil {
+				testhelper.DiffStringSlice(t,
+					tc.IDStr(), "value",
+					val, tc.expVal)
+			}
+		}
 	}
 }
