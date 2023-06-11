@@ -163,11 +163,11 @@ func TestParse(t *testing.T) {
 		parseErrs.AddError(
 			"Final Checks",
 			errors.New("Bad PreRelIDs:"+
-				" (the length of the list (3) is incorrect:"+
-				" the value (3) must equal 0"+
+				" either [the length of the list (3) is incorrect:"+
+				" the value (3) must equal 0]"+
 				" or"+
-				" the length of the list (3) is incorrect:"+
-				" the value (3) must equal 2)"))
+				" [the length of the list (3) is incorrect:"+
+				" the value (3) must equal 2]"))
 
 		svvInit := semverparams.SemverVals{}
 		svCksInit := semverparams.SemverChecks{}
@@ -199,11 +199,11 @@ func TestParse(t *testing.T) {
 		parseErrs.AddError(
 			"Final Checks",
 			errors.New("Bad BuildIDs:"+
-				" (the length of the list (3) is incorrect:"+
-				" the value (3) must equal 0"+
+				" either [the length of the list (3) is incorrect:"+
+				" the value (3) must equal 0]"+
 				" or"+
-				" the length of the list (3) is incorrect:"+
-				" the value (3) must equal 2)"))
+				" [the length of the list (3) is incorrect:"+
+				" the value (3) must equal 2]"))
 
 		svvInit := semverparams.SemverVals{}
 		svCksInit := semverparams.SemverChecks{}
@@ -236,11 +236,11 @@ func TestParse(t *testing.T) {
 		parseErrs.AddError(
 			"Final Checks",
 			errors.New(desc+": Bad PreRelIDs:"+
-				" (the length of the list (3) is incorrect:"+
-				" the value (3) must equal 0"+
+				" either [the length of the list (3) is incorrect:"+
+				" the value (3) must equal 0]"+
 				" or"+
-				" the length of the list (3) is incorrect:"+
-				" the value (3) must equal 2)"))
+				" [the length of the list (3) is incorrect:"+
+				" the value (3) must equal 2]"))
 
 		svvInit := semverparams.SemverVals{
 			Prefix: "test-pfx",
@@ -276,11 +276,11 @@ func TestParse(t *testing.T) {
 		parseErrs.AddError(
 			"Final Checks",
 			errors.New(desc+": Bad BuildIDs:"+
-				" (the length of the list (3) is incorrect:"+
-				" the value (3) must equal 0"+
+				" either [the length of the list (3) is incorrect:"+
+				" the value (3) must equal 0]"+
 				" or"+
-				" the length of the list (3) is incorrect:"+
-				" the value (3) must equal 2)"))
+				" [the length of the list (3) is incorrect:"+
+				" the value (3) must equal 2]"))
 
 		svvInit := semverparams.SemverVals{
 			Desc: desc,
