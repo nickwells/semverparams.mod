@@ -1,7 +1,7 @@
 github.com/nickwells/check.mod/v2 v2.1.10 h1:OSHCxYdF9LLa/09Wth1LHkEaFHFBK62Ah6Uo8WCXbfM=
 github.com/nickwells/check.mod/v2 v2.1.10/go.mod h1:7mQeHzBP/hXXLpurLxtYAWC/ObtpST0eYixy10+cTP4=
-github.com/nickwells/checksetter.mod/v4 v4.0.2 h1:xcw3mQPop2AiP8r0oLkIrH/HIjx7COGaGBIWQMmZDrc=
-github.com/nickwells/checksetter.mod/v4 v4.0.2/go.mod h1:8TZqz2jmR86JnDbf753ILzxvBg+/ueBVJxeR3Dn+IXA=
+github.com/nickwells/checksetter.mod/v4 v4.0.3 h1:rA+nebc1hzKSw/rEsrjRx3dVBwYUpKPWDEUxbwlHADU=
+github.com/nickwells/checksetter.mod/v4 v4.0.3/go.mod h1:N7R09w3FnFTQkWLPXOv6RTPevxg/33MQtGHq/MewQC4=
 github.com/nickwells/english.mod v1.1.4 h1:gY8B1DxHgoluXesTKLQ6m3fcmcWnyVq3oyWswozKlmw=
 github.com/nickwells/english.mod v1.1.4/go.mod h1:IyeQavDOac+BqnX85asYOUqSzVkCBWg2IDACIs5iQ0M=
 github.com/nickwells/errutil.mod v1.2.12 h1:fUnPebihRTdxm8Lalvd0niKDMT0loM+sgW+jtFp4dgM=
@@ -16,8 +16,8 @@ github.com/nickwells/mathutil.mod/v2 v2.2.1 h1:mMZz1JjsUsq0Ctds4Qa/bbfDFh0pjoeI0
 github.com/nickwells/mathutil.mod/v2 v2.2.1/go.mod h1:7boYOp2rBhN5owQS8QIHC1e1e+Ye8EGvmWiGN5X1Vss=
 github.com/nickwells/pager.mod v1.0.11 h1:actfWhNh1TPtRpMPwJcRvYeuL2iRd+JQ44l+4KKsoJg=
 github.com/nickwells/pager.mod v1.0.11/go.mod h1:rRmwJHKd/xaSpi/xqJv7P7IJUtFeoJ9s/8yoJ+mh+tM=
-github.com/nickwells/param.mod/v5 v5.18.0 h1:1Jd+92pduO0/qeAGL3w/PXav541G6IZAvFq5+btePRs=
-github.com/nickwells/param.mod/v5 v5.18.0/go.mod h1:XhAC54+omNEqotWW6kOP89Jec4ss3vntX19M+MOn6wE=
+github.com/nickwells/param.mod/v5 v5.19.0 h1:WjDhlb5dwALoPj0F5a80coLgrEe4zEe9qn1bpkWW9Yw=
+github.com/nickwells/param.mod/v5 v5.19.0/go.mod h1:VT75Y0A73fg2hsNTnc3k3ioKbtkwT68zyL4N10cGn2Y=
 github.com/nickwells/semver.mod/v3 v3.1.1 h1:01t9akx9SmkFUyfy6ONDjyeujBWc6JnRsTnwclqSWzA=
 github.com/nickwells/semver.mod/v3 v3.1.1/go.mod h1:j/NhvvEgoqpJSxmzqBEzJSvtD/T9lciw25tRvv1pBVE=
 github.com/nickwells/strdist.mod v1.1.11 h1:pD5g6sHEyLR/89MYjYRAc6cXHZ4f7INqSkahXbzSnNE=
