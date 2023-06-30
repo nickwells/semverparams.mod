@@ -11,7 +11,7 @@ import (
 // parameters to your program interface
 func Example() {
 	svp := semverparams.SemverVals{}
-	ps := paramset.NewOrDie(
+	ps := paramset.NewOrPanic(
 		semverparams.AddSemverGroup,
 		svp.AddSemverParam(nil),
 	)
@@ -39,7 +39,7 @@ func Example_withChecks() {
 	svc := semverparams.SemverChecks{}
 	svp := semverparams.SemverVals{}
 
-	ps := paramset.NewOrDie(
+	ps := paramset.NewOrPanic(
 		semverparams.AddSemverGroup,
 		svp.AddSemverParam(&svc),
 		svc.AddCheckParams(),
@@ -105,7 +105,7 @@ func Example_unchecked() {
 	svp1 := semverparams.SemverVals{}
 	svp2 := semverparams.SemverVals{Prefix: "sv2"}
 
-	ps := paramset.NewOrDie(
+	ps := paramset.NewOrPanic(
 		semverparams.AddSemverGroup,
 		svp1.AddSemverParam(&svc),
 		svp2.AddSemverParam(nil),
