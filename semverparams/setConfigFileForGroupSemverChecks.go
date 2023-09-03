@@ -25,14 +25,14 @@ config file, thereby enforcing a global policy.
 func setConfigFileForGroupSemverChecks(ps *param.PSet) error {
 	baseDir := xdg.ConfigHome()
 
-	ps.AddGroupConfigFile("semver.checks",
+	ps.AddGroupConfigFile("semver-checks",
 		filepath.Join(baseDir,
 			"github.com",
 			"nickwells",
 			"semverparams.mod",
 			"v6",
 			"semverparams",
-			"group-semver.checks.cfg"),
+			"group-semver-checks.cfg"),
 		filecheck.Optional)
 	return nil
 }
@@ -54,14 +54,14 @@ func setGlobalConfigFileForGroupSemverChecks(ps *param.PSet) error {
 	}
 	baseDir := dirs[0]
 
-	ps.AddGroupConfigFile("semver.checks",
+	ps.AddGroupConfigFile("semver-checks",
 		filepath.Join(baseDir,
 			"github.com",
 			"nickwells",
 			"semverparams.mod",
 			"v6",
 			"semverparams",
-			"group-semver.checks.cfg"),
+			"group-semver-checks.cfg"),
 		filecheck.Optional)
 	return nil
 }
