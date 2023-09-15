@@ -6,8 +6,8 @@ import (
 
 	"github.com/nickwells/check.mod/v2/check"
 	"github.com/nickwells/checksetter.mod/v4/checksetter"
-	"github.com/nickwells/param.mod/v5/param"
-	"github.com/nickwells/param.mod/v5/param/psetter"
+	"github.com/nickwells/param.mod/v6/param"
+	"github.com/nickwells/param.mod/v6/psetter"
 	"github.com/nickwells/semver.mod/v3/semver"
 )
 
@@ -153,18 +153,21 @@ func (svv *SemverVals) AddSemverParam(svCks *SemverChecks) param.PSetOptFunc {
 	}
 }
 
-// IDListSetter will return a psetter.StrList correctly constructed for
+// IDListSetter will return a psetter.StrList[string] correctly constructed for
 // setting a list of semver IDs (either pre-release or build IDs). You should
 // pass the appropriate semver.Check...ID function depending on the type of
 // list of IDs you want to set. It will panic (as this is a coding error) if
 // the idChk function is nil.
-func IDListSetter(val *[]string, idChk check.ValCk[string]) psetter.StrList {
+func IDListSetter(
+	val *[]string,
+	idChk check.ValCk[string],
+) psetter.StrList[string] {
 	if idChk == nil {
 		panic(errors.New(
 			"the function to check the parts of the ID list is nil"))
 	}
 
-	return psetter.StrList{
+	return psetter.StrList[string]{
 		Value:            val,
 		StrListSeparator: psetter.StrListSeparator{Sep: "."},
 		Checks: []check.ValCk[[]string]{

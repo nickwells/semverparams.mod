@@ -3,7 +3,7 @@ package semverparams_test
 import (
 	"fmt"
 
-	"github.com/nickwells/param.mod/v5/param/paramset"
+	"github.com/nickwells/param.mod/v6/paramset"
 	"github.com/nickwells/semverparams.mod/v6/semverparams"
 )
 

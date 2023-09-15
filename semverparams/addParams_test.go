@@ -6,9 +6,9 @@ import (
 
 	"github.com/nickwells/check.mod/v2/check"
 	"github.com/nickwells/errutil.mod/errutil"
-	"github.com/nickwells/param.mod/v5/param"
-	"github.com/nickwells/param.mod/v5/param/paramset"
-	"github.com/nickwells/param.mod/v5/paramtest"
+	"github.com/nickwells/param.mod/v6/param"
+	"github.com/nickwells/param.mod/v6/paramset"
+	"github.com/nickwells/param.mod/v6/paramtest"
 	"github.com/nickwells/semver.mod/v3/semver"
 	"github.com/nickwells/semverparams.mod/v6/semverparams"
 	"github.com/nickwells/testhelper.mod/v2/testhelper"
