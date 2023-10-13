@@ -1,7 +1,7 @@
 github.com/nickwells/check.mod/v2 v2.1.13 h1:aREfIuA+hPqTUvbAsDYwyy+G5BKSrz2TnC+xkKbse1A=
 github.com/nickwells/check.mod/v2 v2.1.13/go.mod h1:v3Zgj3dIq+EBoHylERTzvat1fTwJHehPsZv03pXWTd8=
-github.com/nickwells/checksetter.mod/v4 v4.0.11 h1:xxZyPzZRsA81LY/l0Ydbi1DCiPr9AngUVU9e+PCg6Xs=
-github.com/nickwells/checksetter.mod/v4 v4.0.11/go.mod h1:F83Ulyv+TdXbP1M8H3zGTDY5NNFBrFpizMRLH5Wboa4=
+github.com/nickwells/checksetter.mod/v4 v4.0.12 h1:zrbXtdN3Jg7JtPRESIZOb8aggqpHJgvtu7u1zc7X8HM=
+github.com/nickwells/checksetter.mod/v4 v4.0.12/go.mod h1:osOPx1ToAQsHnZtGF0HLpjPThK3R648oRDdYZ2zDCKg=
 github.com/nickwells/col.mod/v3 v3.0.17 h1:q7dFXV5Wpo6zkRptuefRZr5g7Hiv5VU9wWBJRYVbw5k=
 github.com/nickwells/col.mod/v3 v3.0.17/go.mod h1:AJ2Ss/nXMiKYAqvZSAGRHSoBuVH9UV6r0udiflMJxLo=
 github.com/nickwells/english.mod v1.1.5 h1:OFmYaQ83fguWAJs3mFUcUYKILKYE4qJRiNDNnuXwp4s=
@@ -18,10 +18,10 @@ github.com/nickwells/mathutil.mod/v2 v2.3.0 h1:DwjCd05iqtXo62s0w20fOKRIfrzpa32Lx
 github.com/nickwells/mathutil.mod/v2 v2.3.0/go.mod h1:iMemGHs0c19VuPxoe2lu86p06BXBJAPGpUFQ2QABHDM=
 github.com/nickwells/pager.mod v1.0.11 h1:actfWhNh1TPtRpMPwJcRvYeuL2iRd+JQ44l+4KKsoJg=
 github.com/nickwells/pager.mod v1.0.11/go.mod h1:rRmwJHKd/xaSpi/xqJv7P7IJUtFeoJ9s/8yoJ+mh+tM=
-github.com/nickwells/param.mod/v6 v6.1.3 h1:xmSryxOM5EfAWDF5i/6H+bqFnTsEssOkXhdtpCVwJX0=
-github.com/nickwells/param.mod/v6 v6.1.3/go.mod h1:0DxZiuICM22RxWSoFWD+5Pf3IAFiZtcB1vfHANABFfw=
-github.com/nickwells/semver.mod/v3 v3.1.4 h1:5JrsMHNflM8N+SBqFeeHesPlW3jj97YdShEGfjqumEk=
-github.com/nickwells/semver.mod/v3 v3.1.4/go.mod h1:J5gMdRzJd5Z4SsYIp7ifKhkPLRHSruQ/ExEzLrT0XZc=
+github.com/nickwells/param.mod/v6 v6.1.4 h1:oudCkWrzVjLDnHUnZBkgPo6niSMmDEac7MJR/Fu20Ww=
+github.com/nickwells/param.mod/v6 v6.1.4/go.mod h1:0DxZiuICM22RxWSoFWD+5Pf3IAFiZtcB1vfHANABFfw=
+github.com/nickwells/semver.mod/v3 v3.1.5 h1:/FfQyFN9r/91oyC20DqelfNq8BEdFagelLTcpscZ1Z0=
+github.com/nickwells/semver.mod/v3 v3.1.5/go.mod h1:J5gMdRzJd5Z4SsYIp7ifKhkPLRHSruQ/ExEzLrT0XZc=
 github.com/nickwells/strdist.mod v1.1.13 h1:sfpJXSqJ9VUsqhR77r3ajZHpyj33+CMWcKWsMmL37mo=
 github.com/nickwells/strdist.mod v1.1.13/go.mod h1:LvWHapgiqnIutGkwlGZTZ74c1avDfQN1IF4gPQUZXkg=
 github.com/nickwells/tempus.mod v1.1.0 h1:Xi0diwaBax1zKggNGMxbv65WJoMOQE7uK/Ncbyqhh2Y=

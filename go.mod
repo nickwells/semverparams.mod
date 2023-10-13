@@ -2,11 +2,11 @@ module github.com/nickwells/semverparams.mod/v6
 
 require (
 	github.com/nickwells/check.mod/v2 v2.1.13
-	github.com/nickwells/checksetter.mod/v4 v4.0.11
+	github.com/nickwells/checksetter.mod/v4 v4.0.12
 	github.com/nickwells/errutil.mod v1.2.14
 	github.com/nickwells/filecheck.mod v1.1.23
-	github.com/nickwells/param.mod/v6 v6.1.3
-	github.com/nickwells/semver.mod/v3 v3.1.4
+	github.com/nickwells/param.mod/v6 v6.1.4
+	github.com/nickwells/semver.mod/v3 v3.1.5
 	github.com/nickwells/testhelper.mod/v2 v2.3.0
 	github.com/nickwells/xdg.mod v1.0.9
 )
