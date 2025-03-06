@@ -29,6 +29,4 @@ require (
 	golang.org/x/term v0.15.0 // indirect
 )
 
-go 1.21
-
-toolchain go1.21.0
+go 1.24
