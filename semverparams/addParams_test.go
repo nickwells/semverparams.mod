@@ -23,13 +23,16 @@ type semverPair struct {
 
 func makePSet(svp *semverPair) *param.PSet {
 	ps := paramset.NewNoHelpNoExitNoErrRptOrPanic()
+
 	if svp.svv != nil {
 		_ = semverparams.AddSemverGroup(ps)
 		_ = svp.svv.AddSemverParam(svp.svCks)(ps)
+
 		if svp.addIDs {
 			_ = svp.svv.AddIDParams(svp.svCks)(ps)
 		}
 	}
+
 	if svp.svCks != nil {
 		_ = svp.svCks.AddCheckParams()(ps)
 	}
@@ -44,6 +47,7 @@ func cmpSemverPairs(iVal, iExpVal any) error {
 	if !ok {
 		return errors.New("Bad value: not a semverPair struct")
 	}
+
 	expVal, ok := iExpVal.(semverPair)
 	if !ok {
 		return errors.New("Bad expected value: not a semverPair struct")
@@ -232,6 +236,7 @@ func TestParse(t *testing.T) {
 	}
 	{
 		const desc = "test-desc"
+
 		parseErrs := errutil.ErrMap{}
 		parseErrs.AddError(
 			"Final Checks",
@@ -272,6 +277,7 @@ func TestParse(t *testing.T) {
 	}
 	{
 		const desc = "test-desc"
+
 		parseErrs := errutil.ErrMap{}
 		parseErrs.AddError(
 			"Final Checks",
@@ -382,10 +388,12 @@ func TestIDListSetter(t *testing.T) {
 		if err != nil {
 			t.Fatalf("Unexpected error creating the paramset: %v", err)
 		}
+
 		val := []string{}
 		panicked, panicVal := testhelper.PanicSafe(func() {
 			ps.Add("set", semverparams.IDListSetter(&val, tc.idChk), "help")
 		})
+
 		if !testhelper.CheckExpPanicError(t, panicked, panicVal, tc) &&
 			!panicked {
 			errMap := ps.Parse(tc.args)
@@ -396,6 +404,7 @@ func TestIDListSetter(t *testing.T) {
 					}
 				}
 			}
+
 			if testhelper.CheckExpErr(t, err, tc) && err == nil {
 				testhelper.DiffStringSlice(t,
 					tc.IDStr(), "value",

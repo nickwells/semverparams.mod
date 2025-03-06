@@ -22,6 +22,7 @@ func Example() {
 	// production code you should pass nothing to Parse (as in the first line
 	// of this comment) in which case it will use the program arguments.
 	ps.Parse([]string{"-semver", "v1.2.3"})
+
 	if svp.SemVer.HasBeenSet() {
 		fmt.Println(svp.SemVer.String())
 	}
@@ -55,6 +56,7 @@ func Example_withChecks() {
 		"-semver", "v1.2.3-rc.1",
 		"-pre-rel-ID-checks", `Or(Length(EQ(0)), Length(EQ(2)))`,
 	})
+
 	if svp.SemVer.HasBeenSet() {
 		fmt.Println(svp.SemVer.String())
 	}
@@ -123,9 +125,11 @@ func Example_unchecked() {
 		"-sv2-semver", "v2.3.4-unchecked",
 		"-pre-rel-ID-checks", `Or(Length(EQ(0)), Length(EQ(2)))`,
 	})
+
 	if svp1.SemVer.HasBeenSet() {
 		fmt.Println(svp1.SemVer.String())
 	}
+
 	if svp2.SemVer.HasBeenSet() {
 		fmt.Println(svp2.SemVer.String())
 	}

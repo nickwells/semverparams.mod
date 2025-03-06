@@ -65,6 +65,7 @@ func (svv SemverVals) SemVerHasBeenSet() bool {
 	if svv.semverParam == nil {
 		return false
 	}
+
 	return svv.semverParam.HasBeenSet()
 }
 
@@ -74,6 +75,7 @@ func (svv SemverVals) PreRelIDsHaveBeenSet() bool {
 	if svv.preRelIDsParam == nil {
 		return false
 	}
+
 	return svv.preRelIDsParam.HasBeenSet()
 }
 
@@ -83,6 +85,7 @@ func (svv SemverVals) BuildIDsHaveBeenSet() bool {
 	if svv.buildIDsParam == nil {
 		return false
 	}
+
 	return svv.buildIDsParam.HasBeenSet()
 }
 
@@ -230,9 +233,11 @@ func (svv *SemverVals) AddIDParams(svCks *SemverChecks) param.PSetOptFunc {
 func checkIDs(svv *SemverVals, svCks *SemverChecks) param.FinalCheckFunc {
 	return func() error {
 		errPfx := ""
+
 		if svv.Desc != "" {
 			errPfx = svv.Desc + ": "
 		}
+
 		for _, chk := range svCks.PreRelIDChecks {
 			err := chk(svv.PreRelIDs)
 			if err != nil {
@@ -256,9 +261,11 @@ func checkIDs(svv *SemverVals, svCks *SemverChecks) param.FinalCheckFunc {
 func checkSemverIDs(svv *SemverVals, svCks *SemverChecks) param.FinalCheckFunc {
 	return func() error {
 		errPfx := ""
+
 		if svv.Desc != "" {
 			errPfx = svv.Desc + ": "
 		}
+
 		for _, chk := range svCks.PreRelIDChecks {
 			err := chk(svv.SemVer.PreRelIDs())
 			if err != nil {
@@ -283,6 +290,7 @@ func (svCks *SemverChecks) AddCheckParams() param.PSetOptFunc {
 	return func(ps *param.PSet) error {
 		prefix := ""
 		groupName := semverChecksGroupName
+
 		if svCks.Name != "" {
 			prefix = svCks.Name + "-"
 			groupName += "-" + svCks.Name

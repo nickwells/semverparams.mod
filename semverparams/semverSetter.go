@@ -22,6 +22,7 @@ func (svs SVSetter) SetWithVal(_ string, paramVal string) error {
 	if err != nil {
 		return err
 	}
+
 	v.CopyInto(svs.Value)
 
 	return nil

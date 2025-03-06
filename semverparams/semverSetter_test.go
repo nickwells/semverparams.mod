@@ -34,6 +34,7 @@ func TestSetter(t *testing.T) {
 
 		testhelper.DiffString(t, tc.IDStr(), "semantic version number",
 			svs.CurrentValue(), "")
+
 		err := svs.SetWithVal("", tc.paramVal)
 		if testhelper.CheckExpErr(t, err, tc) && err == nil {
 			testhelper.DiffString(t, tc.IDStr(), "semantic version number",
