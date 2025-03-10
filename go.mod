@@ -1,12 +1,12 @@
 module github.com/nickwells/semverparams.mod/v6
 
 require (
-	github.com/nickwells/check.mod/v2 v2.1.15
-	github.com/nickwells/checksetter.mod/v4 v4.0.15
+	github.com/nickwells/check.mod/v2 v2.1.16
+	github.com/nickwells/checksetter.mod/v4 v4.0.16
 	github.com/nickwells/errutil.mod v1.2.15
-	github.com/nickwells/filecheck.mod v1.2.1
-	github.com/nickwells/param.mod/v6 v6.2.0
-	github.com/nickwells/semver.mod/v3 v3.1.7
+	github.com/nickwells/filecheck.mod v1.2.2
+	github.com/nickwells/param.mod/v6 v6.2.1
+	github.com/nickwells/semver.mod/v3 v3.1.8
 	github.com/nickwells/testhelper.mod/v2 v2.3.1
 	github.com/nickwells/xdg.mod v1.0.10
 )
@@ -17,7 +17,7 @@ require (
 )
 
 require (
-	github.com/nickwells/english.mod v1.1.6 // indirect
+	github.com/nickwells/english.mod v1.2.0 // indirect
 	github.com/nickwells/fileparse.mod v1.1.32 // indirect
 	github.com/nickwells/location.mod v1.2.28 // indirect
 	github.com/nickwells/mathutil.mod/v2 v2.5.0 // indirect
