@@ -34,6 +34,7 @@ func setConfigFileForGroupSemverChecks(ps *param.PSet) error {
 			"semverparams",
 			"group-semver-checks.cfg"),
 		filecheck.Optional)
+
 	return nil
 }
 
@@ -52,6 +53,7 @@ func setGlobalConfigFileForGroupSemverChecks(ps *param.PSet) error {
 	if len(dirs) == 0 {
 		return nil
 	}
+
 	baseDir := dirs[0]
 
 	ps.AddGroupConfigFile("semver-checks",
@@ -63,5 +65,6 @@ func setGlobalConfigFileForGroupSemverChecks(ps *param.PSet) error {
 			"semverparams",
 			"group-semver-checks.cfg"),
 		filecheck.Optional)
+
 	return nil
 }

@@ -125,6 +125,8 @@ const (
 	semverChecksGroupName = "semver-checks"
 )
 
+// AddSemverGroup adds the group for the common semantic versioning-related
+// parameters
 func AddSemverGroup(ps *param.PSet) error {
 	ps.AddGroup(semverGroupName,
 		"common parameters concerned with "+semver.Names)
