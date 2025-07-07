@@ -29,7 +29,7 @@ func TestSetter(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
-		var sv semver.SV
+		sv := semver.SV{}
 		svs := semverparams.SVSetter{Value: &sv}
 
 		testhelper.DiffString(t, tc.IDStr(), "semantic version number",
@@ -42,7 +42,7 @@ func TestSetter(t *testing.T) {
 		}
 	}
 
-	var sv semver.SV
+	sv := semver.SV{}
 	checkSetterTests := []struct {
 		testhelper.ID
 		testhelper.ExpPanic
