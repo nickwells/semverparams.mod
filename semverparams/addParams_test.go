@@ -6,9 +6,9 @@ import (
 
 	"github.com/nickwells/check.mod/v2/check"
 	"github.com/nickwells/errutil.mod/errutil"
-	"github.com/nickwells/param.mod/v6/param"
-	"github.com/nickwells/param.mod/v6/paramset"
-	"github.com/nickwells/param.mod/v6/paramtest"
+	"github.com/nickwells/param.mod/v7/param"
+	"github.com/nickwells/param.mod/v7/paramset"
+	"github.com/nickwells/param.mod/v7/paramtest"
 	"github.com/nickwells/semver.mod/v3/semver"
 	"github.com/nickwells/semverparams.mod/v6/semverparams"
 	"github.com/nickwells/testhelper.mod/v2/testhelper"
@@ -22,7 +22,7 @@ type semverPair struct {
 }
 
 func makePSet(svp *semverPair) *param.PSet {
-	ps := paramset.NewNoHelpNoExitNoErrRptOrPanic()
+	ps := paramset.NewNoHelpNoExitNoErrRpt()
 
 	if svp.svv != nil {
 		_ = semverparams.AddSemverGroup(ps)
@@ -384,10 +384,7 @@ func TestIDListSetter(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
-		ps, err := paramset.NewNoHelpNoExitNoErrRpt()
-		if err != nil {
-			t.Fatalf("Unexpected error creating the paramset: %v", err)
-		}
+		ps := paramset.NewNoHelpNoExitNoErrRpt()
 
 		val := []string{}
 		panicked, panicVal := testhelper.PanicSafe(func() {
@@ -396,7 +393,11 @@ func TestIDListSetter(t *testing.T) {
 
 		if !testhelper.CheckExpPanicError(t, panicked, panicVal, tc) &&
 			!panicked {
-			errMap := ps.Parse(tc.args)
+			ps.Parse(tc.args)
+
+			var err error
+
+			errMap := ps.Errors()
 			if len(errMap) != 0 {
 				for _, v := range errMap {
 					if len(v) > 0 {

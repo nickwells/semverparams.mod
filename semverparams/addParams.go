@@ -6,8 +6,8 @@ import (
 
 	"github.com/nickwells/check.mod/v2/check"
 	"github.com/nickwells/checksetter.mod/v4/checksetter"
-	"github.com/nickwells/param.mod/v6/param"
-	"github.com/nickwells/param.mod/v6/psetter"
+	"github.com/nickwells/param.mod/v7/param"
+	"github.com/nickwells/param.mod/v7/psetter"
 	"github.com/nickwells/semver.mod/v3/semver"
 )
 

@@ -3,7 +3,7 @@ package semverparams_test
 import (
 	"fmt"
 
-	"github.com/nickwells/param.mod/v6/paramset"
+	"github.com/nickwells/param.mod/v7/paramset"
 	"github.com/nickwells/semverparams.mod/v6/semverparams"
 )
 
@@ -11,7 +11,7 @@ import (
 // parameters to your program interface
 func Example() {
 	svp := semverparams.SemverVals{}
-	ps := paramset.NewOrPanic(
+	ps := paramset.New(
 		semverparams.AddSemverGroup,
 		svp.AddSemverParam(nil),
 	)
@@ -40,7 +40,7 @@ func Example_withChecks() {
 	svc := semverparams.SemverChecks{}
 	svp := semverparams.SemverVals{}
 
-	ps := paramset.NewOrPanic(
+	ps := paramset.New(
 		semverparams.AddSemverGroup,
 		svp.AddSemverParam(&svc),
 		svc.AddCheckParams(),
@@ -73,7 +73,7 @@ func Example_withFailingChecks() {
 
 	// we use a testing-specific paramset generator to suppress the
 	// exit-on-error and error reporting behaviour
-	ps := paramset.NewNoHelpNoExitNoErrRptOrPanic(
+	ps := paramset.NewNoHelpNoExitNoErrRpt(
 		semverparams.AddSemverGroup,
 		svp.AddSemverParam(&svc),
 		svc.AddCheckParams(),
@@ -85,15 +85,17 @@ func Example_withFailingChecks() {
 	// production code you should call Parse with no parameters (as in the
 	// first line of this comment) in which case it will use the program
 	// arguments.
-	errs := ps.Parse([]string{
+	ps.Parse([]string{
 		"-semver", "v1.2.3-invalid",
 		"-pre-rel-ID-checks", `Or(Length(EQ(0)), Length(EQ(2)))`,
 	})
-	if len(errs) != 0 {
+
+	errMap := ps.Errors()
+	if len(errMap) != 0 {
 		// We just print the start of the first error. The normal behaviour
-		// of param.PSet is to print the whole error in a user-accessible
+		// of param.PSet is to print all the errors in a user-accessible
 		// format and then exit
-		fmt.Printf("Error: %-13.13s\n", errs["Final Checks"][0])
+		fmt.Printf("Error: %-13.13s\n", errMap["Final Checks"][0])
 	}
 	// Output:
 	// Error: Bad PreRelIDs
@@ -107,7 +109,7 @@ func Example_unchecked() {
 	svp1 := semverparams.SemverVals{}
 	svp2 := semverparams.SemverVals{Prefix: "sv2"}
 
-	ps := paramset.NewOrPanic(
+	ps := paramset.New(
 		semverparams.AddSemverGroup,
 		svp1.AddSemverParam(&svc),
 		svp2.AddSemverParam(nil),
