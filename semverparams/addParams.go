@@ -174,8 +174,8 @@ func IDListSetter(
 	}
 
 	return psetter.StrList[string]{
-		Value:            val,
-		StrListSeparator: psetter.StrListSeparator{Sep: "."},
+		Value: val,
+		Sep:   ".",
 		Checks: []check.ValCk[[]string]{
 			check.SliceAll[[]string](idChk),
 			check.SliceLength[[]string](check.ValGT(0)),
